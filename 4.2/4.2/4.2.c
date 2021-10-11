@@ -29,8 +29,12 @@ int main()
         {
             printf("%d ", array[i]);
         }
+        printf("\n");
+        const int answer = findFrequentElement(array, size);
+        printf("Самый частый элемент: %d", answer);
     }
-    printf("\n");
-    const int answer = findFrequentElement(array, size);
-    printf("Самый частый элемент: %d", answer);
+    else
+    {
+        printf(":(");
+    }
 }
