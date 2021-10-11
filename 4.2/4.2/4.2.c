@@ -5,8 +5,32 @@
 #include "qsort.h"
 #include "search.h"
 
+bool testFindFrequentElement(int* array, int size, int answer)
+{
+    return findFrequentElement(array, size) == answer;
+}
+
+bool test()
+{
+    int arrayOne[10] = { 4, 90, 2, 1, 2, 90, 5, 2, 1, 6 };
+    int arrayTwo[8] = { 4, 2, 3, 9, 1, 6, 5, 10 };
+    int arrayThree[9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    return
+        testFindFrequentElement(arrayOne, 10, 2) &&
+        !testFindFrequentElement(arrayOne, 10, 90) &&
+        testFindFrequentElement(arrayTwo, 8, 1) &&
+        !testFindFrequentElement(arrayTwo, 8, 4) &&
+        testFindFrequentElement(arrayThree, 9, 1) &&
+        !testFindFrequentElement(arrayThree, 9, 7);
+}
+
 int main()
 {
+    if (!test())
+    {
+        printf("Все плохо :(");
+        return 0;
+    }
     setlocale(LC_ALL, "rus");
     FILE* file = fopen("input.txt", "r");
     if (file == NULL)
