@@ -23,6 +23,16 @@ int convertToDecimal(int* binaryNumber, int number, int size)
 	return decimalNumber;
 }
 
+void sumTwoBinaryNumbers(int* binaryOneNumber, int* binaryTwoNumber, int* sumBinaryNumbers, int size)
+{
+	int remainder = 0;
+	for (int i = size - 1; i >= 0; i--)
+	{
+		sumBinaryNumbers[i] = (binaryOneNumber[i] + binaryTwoNumber[i] + remainder) % 2;
+		remainder = (binaryOneNumber[i] + binaryTwoNumber[i] + remainder) / 2;
+	}
+}
+
 int main()
 {   
     int size = 32;
@@ -30,7 +40,13 @@ int main()
 	int numberTwo = 0;
 	printf("¬ведите два числа: ");
 	scanf("%d %d", &numberOne, &numberTwo);
-	int* binaryNumber = calloc(size, sizeof(int));
-	
-	free(binaryNumber);
+	int* binaryOneNumber = calloc(size, sizeof(int));
+	int* binaryTwoNumber = calloc(size, sizeof(int));
+	int* sumBinaryNumbers = calloc(size, sizeof(int));
+	convertToBinary(binaryOneNumber, numberOne, size);
+	convertToBinary(binaryTwoNumber, numberTwo, size);
+	sumTwoBinaryNumbers(binaryOneNumber, binaryTwoNumber, sumBinaryNumbers, size);
+	free(binaryOneNumber);
+	free(binaryTwoNumber);
+	free(sumBinaryNumbers);
 }
