@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <locale.h>
 
 void convertToBinary(int* binaryNumber, int number, int size)
 {
@@ -11,7 +13,7 @@ void convertToBinary(int* binaryNumber, int number, int size)
 	}
 }
 
-int convertToDecimal(int* binaryNumber, int number, int size)
+int convertToDecimal(int* binaryNumber, int size)
 {
 	int powerOfTwo = 1;
 	int decimalNumber = 0;
@@ -33,19 +35,41 @@ void sumTwoBinaryNumbers(int* binaryOneNumber, int* binaryTwoNumber, int* sumBin
 	}
 }
 
+void printArray(int* array, int size)
+{  
+	for (int i = 0; i < size; i++)
+	{
+		printf("%d", array[i]);
+	}
+	printf("\n");
+}
+
 int main()
 {   
+	setlocale(LC_ALL, "rus");
     int size = 32;
 	int numberOne = 0;
 	int numberTwo = 0;
-	printf("¬ведите два числа: ");
-	scanf("%d %d", &numberOne, &numberTwo);
+	printf("¬ведите первое число: ");
+	scanf("%d", &numberOne);
+	printf("\n");
+	printf("¬ведите второе число: ");
+	scanf("%d", &numberTwo);
+	printf("\n");
 	int* binaryOneNumber = calloc(size, sizeof(int));
 	int* binaryTwoNumber = calloc(size, sizeof(int));
 	int* sumBinaryNumbers = calloc(size, sizeof(int));
+	printf("„исло %d в двоичном представлении в дополнительном коде: ", numberOne);
 	convertToBinary(binaryOneNumber, numberOne, size);
+	printArray(binaryOneNumber, size);
+	printf("„исло %d в двоичном представлении в дополнительном коде: ", numberTwo);
 	convertToBinary(binaryTwoNumber, numberTwo, size);
+	printArray(binaryTwoNumber, size);
+	printf("»х сумма в двоичном представлении в дополнительном коде: ");
 	sumTwoBinaryNumbers(binaryOneNumber, binaryTwoNumber, sumBinaryNumbers, size);
+	printArray(sumBinaryNumbers, size);
+	printf("»х сумма в дес€тичном представлении: ");
+	printf("%d", convertToDecimal(sumBinaryNumbers, size));
 	free(binaryOneNumber);
 	free(binaryTwoNumber);
 	free(sumBinaryNumbers);
