@@ -7,7 +7,7 @@ struct Entry
 {
 	char name[50];
 	char phone[50];
-};
+}Entry;
 
 void begin()
 {
