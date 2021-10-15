@@ -35,7 +35,7 @@ void sumTwoBinaryNumbers(int* binaryOneNumber, int* binaryTwoNumber, int* sumBin
 	}
 }
 
-void printArray(int* array, int size)
+void printArray(const int* array, int size)
 {  
 	for (int i = 0; i < size; i++)
 	{
@@ -43,7 +43,6 @@ void printArray(int* array, int size)
 	}
 	printf("\n");
 }
-
 
 bool checkBinary(int* binaryNumber, int* answer, int size)
 {
@@ -146,7 +145,7 @@ int main()
 		printf(":(");
 		return 0;
 	}
-	setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, "rus");
     int size = 32;
 	int numberOne = 0;
 	int numberTwo = 0;
@@ -160,18 +159,21 @@ int main()
 	if (binaryOneNumber == NULL)
 	{
 		printf("Все плохо :(");
+		free(binaryOneNumber);
 		return -1;
 	}
 	int* binaryTwoNumber = calloc(size, sizeof(int));
 	if (binaryTwoNumber == NULL)
 	{
 		printf("Все плохо :(");
+		free(binaryTwoNumber);
 		return -1;
 	}
 	int* sumBinaryNumbers = calloc(size, sizeof(int));
 	if (sumBinaryNumbers == NULL)
 	{
 		printf("Все плохо :(");
+		free(sumBinaryNumbers);
 		return -1;
 	}
 	printf("Число %d в двоичном представлении в дополнительном коде: ", numberOne);
