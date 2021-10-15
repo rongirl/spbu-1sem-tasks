@@ -110,7 +110,6 @@ bool checkDecimal()
 	return
 		convertToDecimal(binaryNumber358, 32) == 358 &&
 		convertToDecimal(binaryNumber100, 32) == -100;
-
 }
 
 bool checkSum()
