@@ -31,7 +31,7 @@ void printAllNotes(Entry* PhoneBook, int countOfNotes)
 {
 	if (countOfNotes == 0)
 	{
-		printf("Нет записей");
+		printf("Нет записей\n");
 		return;
 	}
 	for (int i = 0; i < countOfNotes; i++)
@@ -39,6 +39,23 @@ void printAllNotes(Entry* PhoneBook, int countOfNotes)
 		printf("%s - %s\n", PhoneBook[i].name, PhoneBook[i].phone);
 	}
 }
+
+const char *findName(Entry* PhoneBook, const char phone[], int countOfNotes)
+{
+	if (countOfNotes == 0)
+	{
+		return "Нет записей\n";
+	}
+	for (int i = 0; i < countOfNotes; i++)
+	{
+		if (strcmp(PhoneBook[i].phone, phone) == 0)
+		{
+			return PhoneBook[i].name;
+		}
+	}
+	return "Не найдено\n";
+}
+
 int main()
 {
 	setlocale(LC_ALL, "rus");
@@ -52,5 +69,6 @@ int main()
 	addNote(PhoneBook, name, phone, countOfNotes);
 	++countOfNotes;
 	printAllNotes(PhoneBook, countOfNotes);
+	printf("%s", findName(PhoneBook, "89595955", countOfNotes));
 	//printf("%s %s", PhoneBook[0].name, PhoneBook[0].phone);
 }
