@@ -27,7 +27,18 @@ void addNote(Entry* PhoneBook, const char name[], const char phone[], int countO
 	strcpy(PhoneBook[countOfNotes].phone, phone);
 }
 
-
+void printAllNotes(Entry* PhoneBook, int countOfNotes)
+{
+	if (countOfNotes == 0)
+	{
+		printf("Нет записей");
+		return;
+	}
+	for (int i = 0; i < countOfNotes; i++)
+	{
+		printf("%s - %s\n", PhoneBook[i].name, PhoneBook[i].phone);
+	}
+}
 int main()
 {
 	setlocale(LC_ALL, "rus");
@@ -37,5 +48,9 @@ int main()
 	const char* phone = "895959595";
 	int countOfNotes = 0;
 	addNote(PhoneBook, name, phone, countOfNotes);
-	printf("%s %s", PhoneBook[0].name, PhoneBook[0].phone);
+	++countOfNotes;
+	addNote(PhoneBook, name, phone, countOfNotes);
+	++countOfNotes;
+	printAllNotes(PhoneBook, countOfNotes);
+	//printf("%s %s", PhoneBook[0].name, PhoneBook[0].phone);
 }
