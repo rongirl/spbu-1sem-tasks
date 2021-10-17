@@ -17,7 +17,6 @@ void begin()
 	printf("2 - распечатать все имеющиеся записи \n");
 	printf("3 - найти телефон по имени \n");
 	printf("4 - найти имя по телефону \n");
-	printf("4 - найти имя по телефону \n");
 	printf("5 - сохранить текущие данные в файл \n");
 }
 
@@ -51,6 +50,22 @@ const char *findName(Entry* PhoneBook, const char phone[], int countOfNotes)
 		if (strcmp(PhoneBook[i].phone, phone) == 0)
 		{
 			return PhoneBook[i].name;
+		}
+	}
+	return "Не найдено\n";
+}
+
+const char* findPhone(Entry* PhoneBook, const char name[], int countOfNotes)
+{
+	if (countOfNotes == 0)
+	{
+		return "Нет записей\n";
+	}
+	for (int i = 0; i < countOfNotes; i++)
+	{
+		if (strcmp(PhoneBook[i].name, name) == 0)
+		{
+			return PhoneBook[i].phone;
 		}
 	}
 	return "Не найдено\n";
