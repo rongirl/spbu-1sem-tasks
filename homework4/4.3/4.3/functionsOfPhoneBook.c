@@ -1,6 +1,7 @@
 #include "functionsOfPhoneBook.h"
 #include <stdio.h>
-
+#include <string.h>
+#include <stdlib.h>
 
 void begin()
 {
@@ -62,7 +63,7 @@ void saveData(Entry* PhoneBook, const char filename[], int countOfNotes)
     if (file == NULL)
     {
         printf("File not found");
-        return -1;
+        return;
     }
     for (int i = 0; i < countOfNotes; i++)
     {

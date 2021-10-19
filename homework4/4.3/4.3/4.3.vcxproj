@@ -141,12 +141,15 @@
   <ItemGroup>
     <ClCompile Include="4.3.c" />
     <ClCompile Include="functionsOfPhoneBook.c" />
+    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="base.txt" />
+    <Text Include="test.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functionsOfPhoneBook.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

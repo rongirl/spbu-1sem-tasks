@@ -4,9 +4,15 @@
 #include <locale.h>
 #include <stdbool.h>
 #include "functionsOfPhoneBook.h"
+#include "test.h"
 
 int main()
-{
+{   
+    if (!test())
+    {
+        printf(":(");
+        return -1;
+    }
     setlocale(LC_ALL, "rus");
     Entry PhoneBook[100] = { '\0' };
     begin();
