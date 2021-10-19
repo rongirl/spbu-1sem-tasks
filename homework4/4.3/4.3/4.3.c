@@ -11,13 +11,14 @@ int main()
     if (!test())
     {
         printf(":(");
-        return -1;
+        
     }
     setlocale(LC_ALL, "rus");
     Entry PhoneBook[100] = { '\0' };
     begin();
     bool flag = true;
     int countOfNotes = countOfNotesInPhoneBook(PhoneBook, "base.txt");
+    printf("%d", countOfNotes);
     while (flag)
     {
         char input = '\0';

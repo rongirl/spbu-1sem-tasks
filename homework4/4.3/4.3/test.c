@@ -31,39 +31,33 @@ bool testFindFunctions(Entry* PhoneBookTest)
         strcmp(findPhone(PhoneBookTest, "Vasya", 3), "424234-434234") == 0;
 }
 
-void testSaveData(Entry* PhoneBookTest)
+bool testSaveData(Entry* PhoneBookTest)
 {
     saveData(PhoneBookTest, "test.txt", 3);
     Entry DataFromFile[10] = { 0 };
-    countOfNotesInPhoneBook(DataFromFile, "text.txt");
-    for (int i = 0; i < 2; i++)
-    {
-        printf("%s ", DataFromFile[i].name);
-        printf("%s\n", DataFromFile[i].phone);
-    }
-}
-   /* char* data[6] = {"Kolya", "123456", "Vasya", "424234 - 434234", "Andrey", "+7987654321"};
+    int ni = countOfNotesInPhoneBook(DataFromFile, "test.txt");
+    char* data[6] = { "Kolya", "123456", "Vasya", "424234 - 434234", "Andrey", "+7987654321" };
     for (int i = 0; i < 5; i += 2)
     {
         if (strcmp(DataFromFile[i / 2].name, data[i]) != 0)
         {
-            return false;
+           // return false;
         }
     }
     for (int i = 1; i < 6; i += 2)
     {
         if (strcmp(DataFromFile[i / 2].phone, data[i]) != 0)
         {
-            return false;
+            //return false;
         }
     }
-    return true;
-    */
+    return ;
+}
 
 
 bool test()
 {
     Entry PhoneBookTest[10] = { 0 };
     return testCountOfNotesInPhoneBook(PhoneBookTest, "test.txt") && testAddNote(PhoneBookTest) &&
-           testFindFunctions(PhoneBookTest);
+           testFindFunctions(PhoneBookTest) && testSaveData(PhoneBookTest);
 }
