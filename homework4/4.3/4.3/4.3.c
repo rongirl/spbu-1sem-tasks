@@ -21,7 +21,7 @@ void begin()
     printf("5 - сохранить текущие данные в файл \n");
 }
 
-int countOfNotesInPhoneBook(Entry* PhoneBook, char const filename[])
+int countOfNotesInPhoneBook(Entry* PhoneBook, const char filename[])
 {
     FILE* file = fopen(filename, "r");
     int countOfNotes = 0;
@@ -193,12 +193,8 @@ int main()
             {
                 saveData(PhoneBook, "base.txt", countOfNotes);
                 printf("Данные сохранены\n");
+                break;
             }
         }
-
-
     }
-
-
-
 }
