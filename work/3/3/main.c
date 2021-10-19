@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void printElementsLessNumber(FILE* file, int* array, int size, int number)
+void printElementsLessNumber(FILE *file, int* array, int size, int number)
 {
     for (int i = 0; i < size; i++)
     {
@@ -12,57 +12,56 @@ void printElementsLessNumber(FILE* file, int* array, int size, int number)
     }
 }
 
-void readFiles(int* array, int number)
-{
-    FILE* fileOneTest = fopen("fTest.txt", "r");
+bool test()
+{  
+    int array[8] = { 5, 6, 7, 1, 2, 3, 4, 6 };
+    int arrayTestOne[5] = { 5, 1, 2, 3, 4 };
+    int number = 6;
+   /*FILE* fileOneTest = fopen("fTest.txt", "r");
     if (fileOneTest == NULL)
     {
         printf("Not found");
-        return;
+        
     }
-    int i = 0;
-    while (!feof(fileOneTest))
+    for (int i = 0; i < 8; i++)
     {
         fscanf(fileOneTest, "%d", &array[i]);
-        i++;
     }
     fclose(fileOneTest);
     FILE* fileTwoTest = fopen("gTest.txt", "r");
     if (fileTwoTest == NULL)
     {
         printf("Not found");
-        return;
+        //return false;
     }
     fscanf(fileTwoTest, "%d", &number);
     fclose(fileTwoTest);
-}
-
-bool test()
-{
-    int array[10] = { 0 }; 
-    int arrayTestOne[5] = { 5, 1, 2, 3, 4 };
-    int number = 0;
-    readFiles(array, number);
-    FILE* fileTest = fopen("hTest.txt", "a+");
-    printElementsLessNumber(fileTest, array, 10, number);
-    int arrayTestTwo[10] = { 0 };
-    for (int i = 0; !feof(fileTest); i++)
+    */
+    FILE *fileTest = fopen("hTest.txt", "a+");
+    printElementsLessNumber(fileTest, array, 8, number);
+    int arrayTestTwo[5] = { 0 };
+    for (int i = 0; i < 5; i++)
     {
-        fscanf(fileTest, "%d", &arrayTestTwo);
+        fscanf(fileTest, "%d", &arrayTestTwo[i]);
     }
     fclose(fileTest);
     for (int i = 0; i < 5; i++)
     {
         if (arrayTestOne[i] != arrayTestTwo[i])
         {
-            return false;
+            return false; 
         }
     }
     return true;
 }
 
 int main()
-{  
+{   
+    if (!test())
+    {
+        printf(":(");
+        return -1;
+    }
     FILE *fileOne = fopen("f.txt", "r");
     if (fileOne == NULL)
     {
