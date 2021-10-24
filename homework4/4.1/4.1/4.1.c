@@ -160,7 +160,6 @@ int main()
     if (binaryOneNumber == NULL)
     {
         printf("Все плохо :(");
-        free(binaryOneNumber);
         free(binaryTwoNumber);
         free(sumBinaryNumbers);
         return -1;
@@ -169,7 +168,6 @@ int main()
     {
         printf("Все плохо :(");
         free(binaryOneNumber);
-        free(binaryTwoNumber);
         free(sumBinaryNumbers);
         return -1;
     }
@@ -178,7 +176,6 @@ int main()
         printf("Все плохо :(");
         free(binaryOneNumber);
         free(binaryTwoNumber);
-        free(sumBinaryNumbers);
         return -1;
     }
     printf("Число %d в двоичном представлении в дополнительном коде: ", numberOne);
