@@ -11,7 +11,7 @@ bool areTestsPassing()
     }
     push(&headTest, 7);
     push(&headTest, 8);
-    if (isEmpty(&headTest))
+    if (isEmpty(headTest))
     {
         return false;
     }
