@@ -1,6 +1,6 @@
 #include "..\..\stack\stack\stack.h"
 #include <stdio.h>
-
+#include <locale.h>
 
 bool isCorrectSequence(const char string[])
 {
@@ -37,8 +37,19 @@ bool isCorrectSequence(const char string[])
     return isEmpty(&head);
 }
 
-int main()
+bool areTTestsPassing()
 {
+    return
+        !isCorrectSequence("([])(") &&
+        isCorrectSequence("()[]{}") &&
+        !isCorrectSequence("(((]") &&
+        isCorrectSequence("([{}])") &&
+        !isCorrectSequence("{}{}}}");
+}
+
+int main()
+{   
+    setlocale(LC_ALL, "rus");
     char string[200] = { '\0' };
     scanf("%s", &string);
     printf("%d", isCorrectSequence(string));
