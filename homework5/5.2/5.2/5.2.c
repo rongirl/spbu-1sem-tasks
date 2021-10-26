@@ -35,21 +35,24 @@ bool isCorrectSequence(const char string[])
             }
         } 
     }
-    //return isEmpty(head);
-    return true;
+    return isEmpty(head);
 }
 
 bool isPassed()
 {
-    char stringTestOne[30] = "([{}])([])";
-    char stringTestTwo[30] = "(([[}}))";
-    char stringTestThree[30] = "(((]]]";
-    char stringTestFour[30] = "[](){}()";
+    char stringTestOne[200] = { '\0' };
+    char stringTestTwo[200] = { '\0' } ;
+    char stringTestThree[200] = { '\0' };
+    char stringTestFour[200] = { '\0' };
+    strcpy(stringTestOne, "([{}])([])");
+    strcpy(stringTestTwo, "(([[}}))");
+    strcpy(stringTestThree, "(((]]]");
+    strcpy(stringTestFour, "[](){}()");
     return
-        isCorrectSequence(stringTestOne); //&&
-       // !isCorrectSequence(stringTestTwo) &&
-      //  !isCorrectSequence(stringTestThree) &&
-      //  isCorrectSequence(stringTestFour);
+        isCorrectSequence(stringTestOne) &&
+        !isCorrectSequence(stringTestTwo) &&
+        !isCorrectSequence(stringTestThree) &&
+        isCorrectSequence(stringTestFour);
 }
 
 int main()
@@ -58,11 +61,15 @@ int main()
     if (!isPassed())
     {
         printf("Tests failed");
-        //return -1;
+        return -1;
     }
     char string[200] = { '\0' };
-    char stringTestOne[30] = "([{}])([])";
+    printf("Введите скобочную последовательность: ");
     scanf("%s", &string);
-    printf("%d", isCorrectSequence(stringTestOne));
-    printf("%d", isCorrectSequence(string));
+    if (isCorrectSequence(string))
+    {
+        printf("Была введена правильная последовательность.");
+        return 0;
+    }
+    printf("Была введена неправильная последовательность.");
 }
