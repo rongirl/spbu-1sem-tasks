@@ -57,19 +57,16 @@ int calculate(char string[])
                 {
                     current = operandOne + operandTwo;
                     push(&head, current);
-
                 }
                 else if (string[i] == '-')
                 {
                     current = operandTwo - operandOne;
                     push(&head, current);
-
                 }
                 else if (string[i] == '*')
                 {
                     current = operandOne * operandTwo;
                     push(&head, current);
-
                 }
                 else if (string[i] == '/')
                 {   
