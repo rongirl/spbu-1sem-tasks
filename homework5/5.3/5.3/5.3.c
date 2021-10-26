@@ -95,11 +95,34 @@ void convertToPostfix(char postfix[], char infix[])
     }
 }
 
-int main()
+bool isPassed()
 {
+    char stringTestOne[200] = "(1 + 2 + 3 + 4 + 5) * 2 / 2";
+    char resultTestOne[200] = { '\0' };
+    convertToPostfix(resultTestOne, stringTestOne);
+    char stringTestTwo[200] = "2 * 2 + 1 + 3 - (5 + 5)";
+    char resultTestTwo[200] = { '\0' };
+    convertToPostfix(resultTestTwo, stringTestTwo);
+    char stringTestThree[200] = "5 * 7 + 1 + 2";
+    char resultTestThree[200] = { '\0' };
+    convertToPostfix(resultTestThree, stringTestThree);
+    return
+        strcmp(resultTestOne, "1 2 + 3 + 4 + 5 + 2 * 2 / ") == 0 &&
+        strcmp(resultTestTwo, "2 2 * 1 + 3 + 5 5 + - ") == 0 &&
+        strcmp(resultTestThree, "5 7 * 1 + 2 + ") == 0;
+}
+
+int main()
+{   
+    if (!isPassed())
+    {   
+        printf("Tests failed");
+        return -1;
+    }
     char infix[200] = { '\0' };
     char postfix[200] = { '\0' };
     scanf("\n%[^\n]", &infix);
     convertToPostfix(postfix, infix);
     printf("%s", postfix);
+    
 }
