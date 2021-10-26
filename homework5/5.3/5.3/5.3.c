@@ -35,6 +35,8 @@ void convertToPostfix(char postfix[], char infix[])
             {
                 postfix[indexOfPostfix] = infix[i];
                 ++indexOfPostfix;
+                postfix[indexOfPostfix] = ' ';
+                ++indexOfPostfix;
             }
             else switch (infix[i])
             {
@@ -49,6 +51,8 @@ void convertToPostfix(char postfix[], char infix[])
                         if (priority(infix[i]) >= priority(operatorInStack))
                         {
                             postfix[indexOfPostfix] = operatorInStack;
+                            ++indexOfPostfix;
+                            postfix[indexOfPostfix] = ' ';
                             ++indexOfPostfix;
                         }
                         else
@@ -72,6 +76,8 @@ void convertToPostfix(char postfix[], char infix[])
                     { 
                         postfix[indexOfPostfix] = operatorInStack;
                         ++indexOfPostfix;
+                        postfix[indexOfPostfix] = ' ';
+                        ++indexOfPostfix;
                         operatorInStack = pop(&head);
                     }
                     break;
@@ -84,6 +90,8 @@ void convertToPostfix(char postfix[], char infix[])
     {
         postfix[indexOfPostfix] = pop(&head);
         ++indexOfPostfix;
+        postfix[indexOfPostfix] = ' ';
+        ++indexOfPostfix;
     }
 }
 
@@ -91,7 +99,7 @@ int main()
 {
     char infix[200] = { '\0' };
     char postfix[200] = { '\0' };
-    scanf("%s", &infix);
+    scanf("\n%[^\n]", &infix);
     convertToPostfix(postfix, infix);
     printf("%s", postfix);
 }
