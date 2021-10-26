@@ -2,40 +2,7 @@
 #include <stdbool.h>
 #include "..\..\stack\stack\stack.h"
 #include <string.h>
-#include <locale.h>
-
-int binaryCalculate(StackElement* head, char operator)
-{
-    int operandOne = pop(&head);
-    int operandTwo = pop(&head);
-    int result = 0;
-    switch (operator)
-    {
-        case '+':
-        {   
-            result = operandOne + operandTwo;
-            break;
-        }
-        case '-':
-        {
-            result = operandOne - operandTwo;
-            break;
-        }
-        case '*':
-        {
-            result = operandOne * operandTwo;
-            break;
-        }
-        case '/':
-        {
-            result = operandOne / operandTwo;
-            break;
-        }
-
-    }
-    push(&head, result);
-    return result;
-}
+#include <locale.h>û
 
 int calculate(char string[])
 {   
