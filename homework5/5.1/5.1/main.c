@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "..\..\stack\stack\stack.h"
 #include <string.h>
-#include <locale.h>û
+#include <locale.h>
 
 int calculate(char string[])
 {   
