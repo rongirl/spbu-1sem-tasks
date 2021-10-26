@@ -22,7 +22,7 @@ int priority(char operator)
     }
 }
 
-int convertToPostfix(char postfix[], char infix[])
+void convertToPostfix(char postfix[], char infix[])
 {
     StackElement* head = NULL;
     int indexOfPostfix = 0;
@@ -76,6 +76,11 @@ int convertToPostfix(char postfix[], char infix[])
             }
 
         }
+    }
+    while (!isEmpty(head))
+    {
+        postfix[indexOfPostfix] = pop(&head);
+        ++indexOfPostfix;
     }
 }
 
