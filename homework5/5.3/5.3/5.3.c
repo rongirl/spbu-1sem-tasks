@@ -1,5 +1,6 @@
 #include "..\..\stack\stack\stack.h"
 #include <string.h>
+#include <stdio.h>
 
 int priority(char operator)
 {   
@@ -57,10 +58,12 @@ void convertToPostfix(char postfix[], char infix[])
                         }
                     }
                     push(&head, infix[i]);
+                    break;
                 }
                 case '(':
                 {
                     push(&head, infix[i]);
+                    break;
                 }
                 case ')':
                 {
@@ -86,5 +89,9 @@ void convertToPostfix(char postfix[], char infix[])
 
 int main()
 {
-
+    char infix[200] = { '\0' };
+    char postfix[200] = { '\0' };
+    scanf("%s", &infix);
+    convertToPostfix(postfix, infix);
+    printf("%s", postfix);
 }
