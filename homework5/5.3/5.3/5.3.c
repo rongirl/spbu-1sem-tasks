@@ -1,6 +1,7 @@
 #include "..\..\stack\stack\stack.h"
 #include <string.h>
 #include <stdio.h>
+#include <locale.h>
 
 int priority(char operator)
 {   
@@ -114,15 +115,17 @@ bool isPassed()
 
 int main()
 {   
+    setlocale(LC_ALL, "rus");
     if (!isPassed())
     {   
         printf("Tests failed");
         return -1;
     }
     char infix[200] = { '\0' };
-    char postfix[200] = { '\0' };
+    char postfix[400] = { '\0' };
+    printf("¬ведите выражение в инфиксной форме: ");
     scanf("\n%[^\n]", &infix);
     convertToPostfix(postfix, infix);
+    printf("\n¬веденное выражение в постфиксной форме: ");
     printf("%s", postfix);
-    
 }
