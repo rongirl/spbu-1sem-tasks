@@ -14,7 +14,7 @@ void begin()
     printf("5 - сохранить текущие данные в файл \n");
 }
 
-int countOfNotesInPhoneBook(Entry* PhoneBook, const char filename[])
+int saveFirstData(Entry* phoneBook, const char filename[])
 {
     FILE* file = fopen(filename, "r");
     int countOfNotes = 0;
@@ -23,7 +23,6 @@ int countOfNotesInPhoneBook(Entry* PhoneBook, const char filename[])
         printf("File not found");
         return -1;
     }
-    char* data[200] = { 0 };
     int linesRead = 0;
     while (!feof(file))
     {
@@ -40,24 +39,22 @@ int countOfNotesInPhoneBook(Entry* PhoneBook, const char filename[])
             free(buffer);
             break;
         }
-        data[linesRead] = buffer;
+        if (linesRead % 2 == 0)
+        {
+            strcpy(phoneBook[countOfNotes].name, buffer);
+        }
+        else
+        {
+            strcpy(phoneBook[countOfNotes].phone, buffer);
+            ++countOfNotes;
+        }
         ++linesRead;
     }
     fclose(file);
-    for (int i = 0; i < linesRead - 1; i += 2)
-    {
-        strcpy(PhoneBook[countOfNotes].name, data[i]);
-        strcpy(PhoneBook[countOfNotes].phone, data[i + 1]);
-        ++countOfNotes;
-    }
-    for (int i = 0; i < linesRead; i++)
-    {
-        free(data[i]);
-    }
     return countOfNotes;
 }
 
-void saveData(Entry* PhoneBook, const char filename[], int countOfNotes)
+void saveData(Entry* phoneBook, const char filename[], int countOfNotes)
 {
     FILE* file = fopen(filename, "w");
     if (file == NULL)
@@ -67,24 +64,24 @@ void saveData(Entry* PhoneBook, const char filename[], int countOfNotes)
     }
     for (int i = 0; i < countOfNotes; i++)
     {
-        fprintf(file, "%s ", PhoneBook[i].name);
-        fprintf(file, "%s\n", PhoneBook[i].phone);
+        fprintf(file, "%s ", phoneBook[i].name);
+        fprintf(file, "%s\n", phoneBook[i].phone);
     }
     fclose(file);
 }
 
-void addNote(Entry* PhoneBook, const char name[], const char phone[], int countOfNotes)
+void addNote(Entry* phoneBook, const char name[], const char phone[], int countOfNotes)
 {
     if (countOfNotes < 100)
     {
-        strcpy(PhoneBook[countOfNotes].name, name);
-        strcpy(PhoneBook[countOfNotes].phone, phone);
+        strcpy(phoneBook[countOfNotes].name, name);
+        strcpy(phoneBook[countOfNotes].phone, phone);
         return;
     }
     printf("Лимит записей превышен.\n");
 }
 
-void printAllNotes(Entry* PhoneBook, int countOfNotes)
+void printAllNotes(Entry* phoneBook, int countOfNotes)
 {
     if (countOfNotes == 0)
     {
@@ -93,12 +90,12 @@ void printAllNotes(Entry* PhoneBook, int countOfNotes)
     }
     for (int i = 0; i < countOfNotes; i++)
     {
-        printf("%s ", PhoneBook[i].name);
-        printf("%s\n", PhoneBook[i].phone);
+        printf("%s ", phoneBook[i].name);
+        printf("%s\n", phoneBook[i].phone);
     }
 }
 
-const char* findName(Entry* PhoneBook, const char phone[], int countOfNotes)
+const char* findName(Entry* phoneBook, const char phone[], int countOfNotes)
 {
     if (countOfNotes == 0)
     {
@@ -106,15 +103,15 @@ const char* findName(Entry* PhoneBook, const char phone[], int countOfNotes)
     }
     for (int i = 0; i < countOfNotes; i++)
     {
-        if (strcmp(PhoneBook[i].phone, phone) == 0)
+        if (strcmp(phoneBook[i].phone, phone) == 0)
         {
-            return PhoneBook[i].name;
+            return phoneBook[i].name;
         }
     }
     return "Не найдено";
 }
 
-const char* findPhone(Entry* PhoneBook, const char name[], int countOfNotes)
+const char* findPhone(Entry* phoneBook, const char name[], int countOfNotes)
 {
     if (countOfNotes == 0)
     {
@@ -122,9 +119,9 @@ const char* findPhone(Entry* PhoneBook, const char name[], int countOfNotes)
     }
     for (int i = 0; i < countOfNotes; i++)
     {
-        if (strcmp(PhoneBook[i].name, name) == 0)
+        if (strcmp(phoneBook[i].name, name) == 0)
         {
-            return PhoneBook[i].phone;
+            return phoneBook[i].phone;
         }
     }
     return "Не найдено";

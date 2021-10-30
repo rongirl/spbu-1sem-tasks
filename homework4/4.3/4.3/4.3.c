@@ -8,16 +8,16 @@
 
 int main()
 {   
+    setlocale(LC_ALL, "rus");
     if (!test())
     {   
         printf("Все плохо :(");
         return -1;
     }
-    setlocale(LC_ALL, "rus");
-    Entry PhoneBook[100] = { '\0' };
+    Entry phoneBook[100] = { 0 };
     begin();
     bool flag = true;
-    int countOfNotes = countOfNotesInPhoneBook(PhoneBook, "base.txt");
+    int countOfNotes = saveFirstData(phoneBook, "base.txt");
     while (flag)
     {
         char input = '\0';
@@ -37,14 +37,14 @@ int main()
                 char phone[50] = { '\0' };
                 printf("Введите номер телефона:\n");
                 scanf("\n%[^\n]", phone);
-                addNote(PhoneBook, name, phone, countOfNotes);
+                addNote(phoneBook, name, phone, countOfNotes);
                 ++countOfNotes;
                 break;
             }
             case '2':
             {
                 printf("Все имеющиеся записи: \n");
-                printAllNotes(PhoneBook, countOfNotes);
+                printAllNotes(phoneBook, countOfNotes);
                 break;
             }
             case '3':
@@ -52,7 +52,7 @@ int main()
                 char name[50] = { '\0 ' };
                 printf("Введите имя:\n");
                 scanf("\n%[^\n]", name);
-                printf("%s\n", findPhone(PhoneBook, name, countOfNotes));
+                printf("%s\n", findPhone(phoneBook, name, countOfNotes));
                 break;
             }
             case '4':
@@ -60,12 +60,12 @@ int main()
                 char phone[50] = { '\0 ' };
                 printf("Введите номер телефона:\n");
                 scanf("\n%[^\n]", phone);
-                printf("%s\n", findName(PhoneBook, phone, countOfNotes));
+                printf("%s\n", findName(phoneBook, phone, countOfNotes));
                 break;
             } 
             case '5':
             {
-                saveData(PhoneBook, "base.txt", countOfNotes);
+                saveData(phoneBook, "base.txt", countOfNotes);
                 printf("Данные сохранены\n");
                 break;
             }
