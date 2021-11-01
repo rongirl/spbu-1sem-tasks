@@ -3,5 +3,10 @@
 
 int main()
 {
-    return 0;
+    List* list = createList();
+    add(list, 3);
+    add(list, 100);
+    add(list, 1);
+    add(list, 2332);
+    printList(list);
 }

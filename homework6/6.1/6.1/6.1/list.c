@@ -17,6 +17,11 @@ typedef struct Position
     Position* position;
 } Position;
 
+List* createList()
+{
+    return calloc(1, sizeof(List*));
+}
+
 void add(List* list, int value)
 {
     ListElement* currentElement = list->head;
@@ -35,4 +40,14 @@ void add(List* list, int value)
         return;
     }
     previousElement->next = newElement;
+}
+
+void printList(List* list)
+{
+    ListElement* currentElement = list->head;
+    while (currentElement != NULL)
+    {
+        printf("%d ", currentElement->value);
+        currentElement = currentElement->next;
+    }
 }
