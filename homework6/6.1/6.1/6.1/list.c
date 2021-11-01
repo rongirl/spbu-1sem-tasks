@@ -1,5 +1,6 @@
 #include "list.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef struct ListElement
 {
@@ -34,7 +35,29 @@ void deleteList(List* list)
     free(list);
 }
 
-
+bool deleteValue(List* list, int value)
+{
+    ListElement* currentElement = list->head;
+    ListElement* previousElement = NULL;
+    while (currentElement != NULL && currentElement->value != value)
+    {
+        previousElement = currentElement;
+        currentElement = currentElement->next;
+    }
+    if (currentElement == NULL)
+    {
+        return false;
+    }
+    ListElement* temporary = currentElement->next;
+    free(currentElement);
+    if (previousElement == NULL)
+    {   
+        list->head = temporary;
+        return true;
+    }
+    previousElement->next = temporary;
+    return true;
+}
 
 void add(List* list, int value)
 {
