@@ -15,3 +15,5 @@ bool deleteValue(List* list, int value);
 void add(List* list, int value);
 
 void printList(List* list);
+
+void begin();

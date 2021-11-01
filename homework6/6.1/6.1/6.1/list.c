@@ -88,3 +88,12 @@ void printList(List* list)
         currentElement = currentElement->next;
     }
 }
+
+void begin()
+{   
+    printf("¬ведите число:\n");
+    printf("0 Ц выйти\n");
+    printf("1 Ц добавить значение в сортированный список\n");
+    printf("2 Ц удалить значение из списка\n");
+    printf("3 Ц распечатать список\n");
+}
