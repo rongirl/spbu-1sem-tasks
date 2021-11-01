@@ -22,6 +22,20 @@ List* createList()
     return calloc(1, sizeof(List*));
 }
 
+void deleteList(List* list)
+{
+    ListElement* position = list->head;
+    while (position != NULL)
+    {
+        list->head = list->head->next;
+        free(position);
+        position = list->head;
+    }
+    free(list);
+}
+
+
+
 void add(List* list, int value)
 {
     ListElement* currentElement = list->head;
