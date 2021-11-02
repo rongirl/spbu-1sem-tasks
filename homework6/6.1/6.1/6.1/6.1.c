@@ -3,9 +3,15 @@
 #include <locale.h>
 #include "testList.h"
 
+
 int main()
 {   
     setlocale(LC_ALL, "rus");
+    if (!areTestsPassed())
+    {
+        printf(":(");
+        return -1;
+    }
     begin();
     List* list = createList();
     bool isNotNull = true;
@@ -53,5 +59,6 @@ int main()
            }
         }
     }
+    printf("%d", areTestsPassed());
     deleteList(list);
 }

@@ -124,5 +124,5 @@ void begin()
 
 bool isEmpty(List* list)
 {
-    return list == NULL;
+    return list->head == NULL;
 }

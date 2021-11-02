@@ -29,7 +29,7 @@ bool areTestsPassed()
         return true;
     }
     deleteList(list);
-    return true;
+    return false;
 }
 
 bool checkSort(List* list)
