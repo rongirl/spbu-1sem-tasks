@@ -2,12 +2,16 @@
 
 #include <stdbool.h>
 
+// структура списка
 typedef struct List List;
 
+// структура позиций элементов
 typedef struct Position Position;
 
+// структура элемента из списка
 typedef struct ListElement ListElement;
 
+// создание листа
 List* createList();
 
 void deleteList(List* list);
