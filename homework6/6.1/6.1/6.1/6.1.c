@@ -1,6 +1,7 @@
 ﻿#include <stdio.h>
 #include "list.h"
 #include <locale.h>
+#include "testList.h"
 
 int main()
 {   
@@ -52,4 +53,5 @@ int main()
            }
         }
     }
+    deleteList(list);
 }

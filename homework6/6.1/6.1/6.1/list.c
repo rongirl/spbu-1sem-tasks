@@ -15,7 +15,7 @@ typedef struct List
 
 typedef struct Position
 {
-    Position* position;
+    ListElement* position;
 } Position;
 
 List* createList()
@@ -89,6 +89,30 @@ void printList(List* list)
     }
 }
 
+Position* first(List* list)
+{
+    Position* positionFirst = malloc(sizeof(Position));
+    positionFirst->position = list->head;
+    return positionFirst;
+}
+
+Position* next(Position* position)
+{
+    Position* newPosition = malloc(sizeof(Position));
+    newPosition->position = position->position->next;
+    return newPosition;
+}
+
+bool last(Position* position)
+{
+    return position->position == NULL;
+}
+
+int get(List* list, Position* position)
+{
+    return position->position->value;
+}
+
 void begin()
 {   
     printf("¬ведите число:\n");
@@ -96,4 +120,9 @@ void begin()
     printf("1 Ц добавить значение в сортированный список\n");
     printf("2 Ц удалить значение из списка\n");
     printf("3 Ц распечатать список\n");
+}
+
+bool isEmpty(List* list)
+{
+    return list == NULL;
 }

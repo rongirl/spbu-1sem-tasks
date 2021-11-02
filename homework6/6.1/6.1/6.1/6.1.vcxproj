@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="6.1.c" />
     <ClCompile Include="list.c" />
+    <ClCompile Include="testList.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h" />
+    <ClInclude Include="testList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
