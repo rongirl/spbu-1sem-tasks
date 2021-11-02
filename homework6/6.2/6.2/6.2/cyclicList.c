@@ -50,3 +50,23 @@ void deleteValue(List* list, int position)
     list->tail = previousElement;
     free(currentElement);
 }
+
+bool isInListOneElement(List* list)
+{
+    return list->head == list->tail;
+}
+
+int getValue(List* list)
+{
+    return list->head->value;
+}
+
+void deleteList(List* list)
+{
+    while (list->head != list->tail)
+    {
+        deleteValue(list, 1);
+    }
+    free(list->head);
+    free(list);
+}

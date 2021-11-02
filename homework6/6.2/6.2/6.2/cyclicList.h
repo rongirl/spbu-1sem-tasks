@@ -11,3 +11,9 @@ List* createList();
 void add(List* list, int value);
 
 void deleteValue(List* list, int position);
+
+bool isInListOneElement(List* list);
+
+int getValue(List* list);
+
+void deleteList(List* list);
