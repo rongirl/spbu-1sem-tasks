@@ -19,11 +19,6 @@ List* createList()
     return calloc(1, sizeof(List));
 }
 
-bool isEmpty(List* list)
-{
-    return list->head == NULL;
-}
-
 void add(List* list, int value)
 {   
     ListElement* newElement = calloc(1, sizeof(ListElement));
@@ -41,12 +36,17 @@ void add(List* list, int value)
     list->tail->next = list->head;
 }
 
-void printList(List* list)
+void deleteValue(List* list, int position)
 {
     ListElement* currentElement = list->head;
-    while (currentElement != NULL)
+    ListElement* previousElement = list->tail;
+    for (int i = 1; i < position; i++)
     {
-        printf("%d ", currentElement->value);
+        previousElement = currentElement;
         currentElement = currentElement->next;
     }
+    previousElement->next = currentElement->next;
+    list->head = currentElement->next;
+    list->tail = previousElement;
+    free(currentElement);
 }

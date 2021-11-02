@@ -9,3 +9,5 @@ typedef struct ListElement ListElement;
 List* createList();
 
 void add(List* list, int value);
+
+void deleteValue(List* list, int position);
