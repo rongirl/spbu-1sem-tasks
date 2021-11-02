@@ -59,6 +59,5 @@ int main()
            }
         }
     }
-    printf("%d", areTestsPassed());
     deleteList(list);
 }
