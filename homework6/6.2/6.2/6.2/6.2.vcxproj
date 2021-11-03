@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="6.2.c" />
     <ClCompile Include="cyclicList.c" />
+    <ClCompile Include="testCyclicList.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cyclicList.h" />
+    <ClInclude Include="testCyclicList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

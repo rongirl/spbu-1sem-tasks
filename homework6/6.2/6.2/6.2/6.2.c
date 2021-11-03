@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <locale.h>
 #include "cyclicList.h"
+#include "testCyclicList.h"
+
+bool isPassed()
+{
+    return countPosition(10, 2) == 5 &&
+        countPosition(9, 4) == 1 &&
+        countPosition(13, 9) == 11 &&
+        countPosition(4, 8) == 3;
+}
 
 int countPosition(int countOfWarriors, int frequency)
 {   
@@ -21,6 +30,11 @@ int countPosition(int countOfWarriors, int frequency)
 int main()
 {
     setlocale(LC_ALL, "rus");
+    if (!areTestsPassed() || !isPassed())
+    {
+        printf(":(");
+        return -1;
+    }
     printf("¬ведите количество войнов и частоту убийства: ");
     int countOfWarriors = 0;
     int frequency = 0;

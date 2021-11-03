@@ -70,3 +70,8 @@ void deleteList(List* list)
     free(list->head);
     free(list);
 }
+
+bool isEmpty(List* list)
+{
+    return list->head == NULL;
+}

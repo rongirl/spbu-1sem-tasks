@@ -21,9 +21,15 @@
     <ClCompile Include="cyclicList.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="testCyclicList.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cyclicList.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="testCyclicList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
