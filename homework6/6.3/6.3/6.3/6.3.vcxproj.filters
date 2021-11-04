@@ -18,11 +18,11 @@
     <ClCompile Include="6.3.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="list.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="list.c">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="list.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
