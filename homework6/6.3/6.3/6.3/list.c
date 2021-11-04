@@ -52,3 +52,54 @@ void add(List* list, char* name, char* phone)
     }
     currentElement->next = newElement;
 }
+
+void printList(List* list)
+{
+    ListElement* currentElement = list->head;
+    while (currentElement != NULL)
+    {
+        printf("%s - %s\n", currentElement->name, currentElement->phone);
+        currentElement = currentElement->next;
+    }
+}
+
+int getLength(List* list)
+{
+    return list->length;
+}
+
+char* getHeadName(List* list)
+{
+    return list->head->name;
+}
+
+char* getHeadPhone(List* list)
+{
+    return list->head->phone;
+}
+
+void deleteHead(List* list)
+{
+    if (isEmpty(list))
+    {
+        return;
+    }
+    ListElement* position = list->head;
+    ListElement* currentElement = list->head->next;
+    list->length--;
+    free(position);
+    list->head = currentElement;
+}
+
+void deleteList(List* list)
+{
+    ListElement* position = list->head;
+    while (position != NULL)
+    {   
+        list->length--;
+        list->head = list->head->next;
+        free(position);
+        position = list->head;
+    }
+    free(list);
+}
