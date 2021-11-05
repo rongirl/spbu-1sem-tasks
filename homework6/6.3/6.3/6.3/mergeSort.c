@@ -10,7 +10,35 @@ void movingElements(List* listOne, List* listTwo, int count)
     }
 }
 
-List* mergeSort(List* list, bool command)
+List* merge(List* leftList, List* rightList, int command)
+{
+    List* newList = createList();
+    while (getLength(leftList) != 0 && getLength(rightList) != 0)
+    {   
+        int comparison = 0;
+        if (command == 0)
+        {
+            comparison = strcmp(getHeadName(leftList), getHeadName(rightList));
+        }
+        else
+        {
+            comparison = strcmp(getHeadPhone(leftList), getHeadPhone(rightList));
+        }
+        if (comparison < 0)
+        {
+            movingElements(leftList, newList, 1);
+        }
+        else
+        {
+            movingElements(rightList, newList, 1);
+        }
+    }
+    deleteList(leftList);
+    deleteList(rightList);
+    return newList;
+}
+
+List* mergeSort(List* list, int command)
 {
     int length = getLength(list);
     if (length <= 1)
