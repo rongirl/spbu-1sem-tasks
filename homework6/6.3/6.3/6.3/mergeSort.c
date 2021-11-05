@@ -33,6 +33,14 @@ List* merge(List* leftList, List* rightList, int command)
             movingElements(rightList, newList, 1);
         }
     }
+    if (getLength(rightList) == 0)
+    {
+        movingElements(leftList, newList, getLength(leftList));
+    }
+    else
+    {
+        movingElements(rightList, newList, getLength(rightList));
+    }
     deleteList(leftList);
     deleteList(rightList);
     return newList;
@@ -52,5 +60,5 @@ List* mergeSort(List* list, int command)
     deleteList(list);
     leftList = mergeSort(leftList, command);
     rightList = mergeSort(rightList, command);
-
+    return merge(leftList, rightList, command);
 }

@@ -37,8 +37,12 @@ void add(List* list, char* name, char* phone)
 {
     list->length++;
     ListElement* newElement = calloc(1, sizeof(ListElement));
-    newElement->name = name;
-    newElement->phone = phone;
+    char* newName = calloc(1, sizeof(char));
+    char* newPhone = calloc(1, sizeof(char));
+    strcpy(newName, name);
+    strcpy(newPhone, phone);
+    newElement->name = newName;
+    newElement->phone = newPhone;
     newElement->next = NULL;
     if (isEmpty(list))
     {
