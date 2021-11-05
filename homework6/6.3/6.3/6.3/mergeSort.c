@@ -10,3 +10,19 @@ void movingElements(List* listOne, List* listTwo, int count)
     }
 }
 
+List* mergeSort(List* list, bool command)
+{
+    int length = getLength(list);
+    if (length <= 1)
+    {
+        return list;
+    }
+    List* leftList = createList();
+    movingElements(list, leftList, length / 2);
+    List* rightList = createList();
+    movingElements(list, rightList, length - length / 2);
+    deleteList(list);
+    leftList = mergeSort(leftList, command);
+    rightList = mergeSort(rightList, command);
+
+}
