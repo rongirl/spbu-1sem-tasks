@@ -24,10 +24,11 @@ int main()
     fclose(file);
     printf("»сходные данные: \n");
     printList(list);
-    printf("%d", getLength(list));
     printf("\n");
-    List* newList = list;
-    printList(newList);
-    newList = mergeSort(list, 1);
+    printf("¬ведите либо 0, либо 1:\n0 - сортировка по имени\n1 - сортировка по номеру телефона\n");
+    int command = 0;
+    scanf("%d", &command);
+    List* newList = createList();
+    newList = mergeSort(list, command);
     printList(newList);
 }
