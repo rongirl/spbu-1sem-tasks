@@ -1,5 +1,7 @@
 #pragma once 
 
+#include <stdbool.h>
+
 typedef struct ListElement ListElement;
 
 typedef struct Position Position;
@@ -22,3 +24,4 @@ void deleteHead(List* list);
 
 void deleteList(List* list);
 
+bool isEmpty(List* list);

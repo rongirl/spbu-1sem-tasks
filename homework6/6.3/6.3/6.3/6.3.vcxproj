@@ -142,10 +142,12 @@
     <ClCompile Include="6.3.c" />
     <ClCompile Include="list.c" />
     <ClCompile Include="mergeSort.c" />
+    <ClCompile Include="testList.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h" />
     <ClInclude Include="mergeSort.h" />
+    <ClInclude Include="testList.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
