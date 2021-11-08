@@ -25,3 +25,5 @@ void deleteHead(List* list);
 void deleteList(List* list);
 
 bool isEmpty(List* list);
+
+bool checkSort(List* list);

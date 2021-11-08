@@ -108,3 +108,9 @@ void deleteList(List* list)
     free(list);
 }
 
+bool checkSort(List* list, int command)
+{
+    ListElement* currentElement = list->head;
+    int length = getLength(list);
+    if (command)
+}
