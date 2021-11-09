@@ -12,10 +12,10 @@ bool testAddNote(Entry* phoneBookTest)
         strcmp(phoneBookTest[2].phone, "+7987654321") == 0;
 }
 
-bool testSaveFirstData(Entry* phoneBookTest, const char filename[])
+bool testSaveFirstData(Entry* phoneBookTest)
 {
     return
-        saveFirstData(phoneBookTest, "test.txt") == 2;
+        loadFirstData(phoneBookTest, "test.txt") == 2 &&
         strcmp(phoneBookTest[0].name, "Kolya") == 0 &&
         strcmp(phoneBookTest[0].phone, "123456") == 0 &&
         strcmp(phoneBookTest[1].name, "Vasya") == 0 &&
@@ -35,7 +35,7 @@ bool testSaveData(Entry* phoneBookTest)
 {
     saveData(phoneBookTest, "test.txt", 3);
     Entry dataFromFile[10] = { '\0' };
-    int ni = saveFirstData(dataFromFile, "test.txt");
+    loadFirstData(dataFromFile, "test.txt");
     char* data[6] = { "Kolya", "123456", "Vasya", "424234-434234", "Andrey", "+7987654321" };
     for (int i = 0; i < 5; i += 2)
     {

@@ -14,7 +14,7 @@ void begin()
     printf("5 - сохранить текущие данные в файл \n");
 }
 
-int saveFirstData(Entry* phoneBook, const char filename[])
+int loadFirstData(Entry* phoneBook, const char filename[])
 {
     FILE* file = fopen(filename, "r");
     int countOfNotes = 0;
@@ -73,7 +73,7 @@ void saveData(Entry* phoneBook, const char filename[], int countOfNotes)
 void addNote(Entry* phoneBook, const char name[], const char phone[], int countOfNotes)
 {
     if (countOfNotes < 100)
-    {
+    {   
         strcpy(phoneBook[countOfNotes].name, name);
         strcpy(phoneBook[countOfNotes].phone, phone);
         return;
@@ -108,7 +108,7 @@ const char* findName(Entry* phoneBook, const char phone[], int countOfNotes)
             return phoneBook[i].name;
         }
     }
-    return "Не найдено";
+    return NULL;
 }
 
 const char* findPhone(Entry* phoneBook, const char name[], int countOfNotes)
@@ -124,5 +124,5 @@ const char* findPhone(Entry* phoneBook, const char name[], int countOfNotes)
             return phoneBook[i].phone;
         }
     }
-    return "Не найдено";
+    return NULL;
 }

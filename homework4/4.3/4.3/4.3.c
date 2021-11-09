@@ -16,9 +16,9 @@ int main()
     }
     Entry phoneBook[100] = { 0 };
     begin();
-    bool flag = true;
-    int countOfNotes = saveFirstData(phoneBook, "base.txt");
-    while (flag)
+    bool isNotNull = true;
+    int countOfNotes = loadFirstData(phoneBook, "base.txt");
+    while (isNotNull)
     {
         char input = '\0';
         scanf("%c", &input);
@@ -26,7 +26,7 @@ int main()
         {
             case '0':
             {
-                flag = false;
+                isNotNull = false;
                 break;
             }
             case '1':
@@ -52,6 +52,11 @@ int main()
                 char name[50] = { '\0 ' };
                 printf("Введите имя:\n");
                 scanf("\n%[^\n]", name);
+                if (findPhone(phoneBook, name, countOfNotes) == NULL)
+                {
+                    printf("Запись не найдена.\n");
+                    break;
+                }
                 printf("%s\n", findPhone(phoneBook, name, countOfNotes));
                 break;
             }
@@ -60,6 +65,11 @@ int main()
                 char phone[50] = { '\0 ' };
                 printf("Введите номер телефона:\n");
                 scanf("\n%[^\n]", phone);
+                if (findName(phoneBook, phone, countOfNotes) == NULL)
+                {
+                    printf("Запись не найдена.\n");
+                    break;
+                }
                 printf("%s\n", findName(phoneBook, phone, countOfNotes));
                 break;
             } 

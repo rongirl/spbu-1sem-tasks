@@ -11,7 +11,7 @@ typedef struct
 void begin();
 
 // функция считывания данных с файла в начале программы
-int saveFirstData(Entry* phoneBook, const char filename[]);
+int loadFirstData(Entry* phoneBook, const char filename[]);
 
 // сохранение данных со справочника в файл
 void saveData(Entry* phoneBook, const char filename[], int countOfNotes);
