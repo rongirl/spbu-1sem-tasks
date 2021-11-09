@@ -11,7 +11,7 @@ int calculate(char string[])
     {
         if (string[i] != '\0' && string[i] != ' ' && string[i] != '\n')
         {
-            if (string[i] - '0' >= 0 && string[i] - '0' <= 9)
+            if (string[i] >= '0' && string[i] <= '9')
             {
                 push(&head, string[i] - '0');
             }
