@@ -4,9 +4,10 @@
 #include <string.h>
 #include <locale.h>
 
-int calculate(char string[])
+int calculate(const char string[])
 {   
     StackElement* head = NULL;
+
     for (int i = 0; i < 200; i++)
     {
         if (string[i] != '\0' && string[i] != ' ' && string[i] != '\n')
@@ -17,32 +18,27 @@ int calculate(char string[])
             }
             else 
             { 
-                int operandOne = pop(&head);
-                int operandTwo = pop(&head);
-                int current = 0;
+                const int operandOne = pop(&head);
+                const int operandTwo = pop(&head);
                 if (string[i] == '+')
                 {
-                    current = operandOne + operandTwo;
-                    push(&head, current);
+                    push(&head, operandOne + operandTwo);
                 }
                 else if (string[i] == '-')
                 {
-                    current = operandTwo - operandOne;
-                    push(&head, current);
+                    push(&head, operandTwo - operandOne);
                 }
                 else if (string[i] == '*')
                 {
-                    current = operandOne * operandTwo;
-                    push(&head, current);
+                    push(&head, operandOne * operandTwo);
                 }
                 else if (string[i] == '/')
                 {   
                     if (operandOne == 0)
                     {
-                        return -1000000;
+                        return NULL;
                     }
-                    current = operandTwo / operandOne;
-                    push(&head, current);
+                    push(&head, operandTwo / operandOne);
                 }
             }
         }
@@ -57,7 +53,7 @@ bool isPassed()
     char stringTestThree[200] = { '\0' };
     strcpy(stringTestOne, "1 2 + 3 4 + *");
     strcpy(stringTestTwo, "3 4 * 5 6 - *");
-    strcpy(stringTestThree, "4 2 / 5 6 * *");\
+    strcpy(stringTestThree, "4 2 / 5 6 * *");
     return
         calculate(stringTestOne) == 21 &&
         calculate(stringTestTwo) == -12 &&
