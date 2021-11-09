@@ -4,7 +4,7 @@
 
 int main()
 {
-    if (!areTestsPassing)
+    if (!areTestsPassing())
     {
         return -1;
     }

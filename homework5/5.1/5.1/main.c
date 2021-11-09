@@ -70,10 +70,11 @@ int main()
     char string[200] = { '\0' };
     printf("Введите постфиксную запись выражения: ");
     scanf("\n%[^\n]", &string);
-    if (calculate(string) == -1000000)
+    int result = calculate(string);
+    if (result == NULL)
     {
         printf("\nПроизошло деление на ноль");
         return -1;
     }
-    printf("\nПолученный результат: %d", calculate(string));
+    printf("\nПолученный результат: %d", result);
 }

@@ -24,9 +24,9 @@ void push(StackElement** head, int number)
 
 int pop(StackElement** head)
 {
-    if (*head == NULL || head == NULL)
+    if (head == NULL || *head == NULL)
     {
-        return -1000;
+        return NULL;
     }
     StackElement* temporary = *head;
     int value = temporary->value;
