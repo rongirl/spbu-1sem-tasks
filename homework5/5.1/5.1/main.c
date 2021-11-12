@@ -43,7 +43,8 @@ int calculate(const char string[])
                 else if (string[i] == '/')
                 {   
                     if (operandOne == 0)
-                    {
+                    {   
+                        deleteStack(&head);
                         return NULL;
                     }
                     push(&head, operandTwo / operandOne);
@@ -51,7 +52,14 @@ int calculate(const char string[])
             }
         }
     }
-    return pop(&head);
+    int result = pop(&head);
+    if (!isEmpty(head))
+    {   
+        deleteStack(&head);
+        return NULL;
+    }
+    deleteStack(&head);
+    return result;
 }
 
 bool isPassed()
@@ -61,6 +69,7 @@ bool isPassed()
         calculate("3 4 * 5 6 - *") == -12 &&
         calculate("4 2 / 5 6 * *") == 60;
 }
+
 int main()
 {   
     setlocale(LC_ALL, "rus");
@@ -69,13 +78,13 @@ int main()
         printf("Tests failed");
         return -1;
     }
-    char string[200] = { '\0' };
+    char string[1000] = { '\0' };
     printf("Введите постфиксную запись выражения: ");
     scanf("\n%[^\n]", &string);
     int result = calculate(string);
     if (result == NULL)
     {
-        printf("\nПроизошло деление на ноль");
+        printf("\nНекорректное выражение");
         return -1;
     }
     printf("\nПолученный результат: %d", result);
