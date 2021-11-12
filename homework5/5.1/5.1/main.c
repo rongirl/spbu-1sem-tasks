@@ -7,8 +7,8 @@
 int calculate(const char string[])
 {   
     StackElement* head = NULL;
-
-    for (int i = 0; i < 200; i++)
+    int length = strlen(string);
+    for (int i = 0; i < length; i++)
     {
         if (string[i] != '\0' && string[i] != ' ' && string[i] != '\n')
         {
@@ -17,8 +17,16 @@ int calculate(const char string[])
                 push(&head, string[i] - '0');
             }
             else 
-            { 
+            {   
+                if (isEmpty(head))
+                {
+                    return NULL;
+                }
                 const int operandOne = pop(&head);
+                if (isEmpty(head))
+                {
+                    return NULL;
+                }
                 const int operandTwo = pop(&head);
                 if (string[i] == '+')
                 {
@@ -48,16 +56,10 @@ int calculate(const char string[])
 
 bool isPassed()
 {   
-    char stringTestOne[200] = { '\0' };
-    char stringTestTwo[200] = { '\0' };
-    char stringTestThree[200] = { '\0' };
-    strcpy(stringTestOne, "1 2 + 3 4 + *");
-    strcpy(stringTestTwo, "3 4 * 5 6 - *");
-    strcpy(stringTestThree, "4 2 / 5 6 * *");
     return
-        calculate(stringTestOne) == 21 &&
-        calculate(stringTestTwo) == -12 &&
-        calculate(stringTestThree) == 60;
+        calculate("1 2 + 3 4 + *") == 21 &&
+        calculate("3 4 * 5 6 - *") == -12 &&
+        calculate("4 2 / 5 6 * *") == 60;
 }
 int main()
 {   
