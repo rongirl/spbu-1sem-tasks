@@ -22,17 +22,19 @@ int priority(char operator)
             return 3;
         }
     }
+    return 100;
 }
 
-void convertToPostfix(char postfix[], char infix[])
+void convertToPostfix(char postfix[], const char infix[])
 {
     StackElement* head = NULL;
     int indexOfPostfix = 0;
-    for (int i = 0; i < 200; i++)
+    int length = strlen(infix);
+    for (int i = 0; i < length; i++)
     {
         if (infix[i] != '\0' && infix[i] != ' ' && infix[i] != '\n')
         {
-            if (infix[i] - '0' >= 0 && infix[i] - '0' <= 9)
+            if (infix[i] >= '0' && infix[i] <= '9')
             {
                 postfix[indexOfPostfix] = infix[i];
                 ++indexOfPostfix;
@@ -41,50 +43,49 @@ void convertToPostfix(char postfix[], char infix[])
             }
             else switch (infix[i])
             {
-                case '+':
-                case '-':
-                case '*':
-                case '/':
-                {
-                    while (true && !isEmpty(head))
-                    {   
-                        char operatorInStack = pop(&head);
-                        if (priority(infix[i]) >= priority(operatorInStack))
-                        {
-                            postfix[indexOfPostfix] = operatorInStack;
-                            ++indexOfPostfix;
-                            postfix[indexOfPostfix] = ' ';
-                            ++indexOfPostfix;
-                        }
-                        else
-                        {
-                            push(&head, operatorInStack);
-                            break;
-                        }
-                    }
-                    push(&head, infix[i]);
-                    break;
-                }
-                case '(':
-                {
-                    push(&head, infix[i]);
-                    break;
-                }
-                case ')':
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            {
+                while (!isEmpty(head))
                 {
                     char operatorInStack = pop(&head);
-                    while (operatorInStack != '(')
-                    { 
+                    if (priority(infix[i]) >= priority(operatorInStack))
+                    {
                         postfix[indexOfPostfix] = operatorInStack;
                         ++indexOfPostfix;
                         postfix[indexOfPostfix] = ' ';
                         ++indexOfPostfix;
-                        operatorInStack = pop(&head);
                     }
-                    break;
+                    else
+                    {
+                        push(&head, operatorInStack);
+                        break;
+                    }
                 }
+                push(&head, infix[i]);
+                break;
             }
-
+            case '(':
+            {
+                push(&head, infix[i]);
+                break;
+            }
+            case ')':
+            {
+                char operatorInStack = pop(&head);
+                while (operatorInStack != '(')
+                {
+                    postfix[indexOfPostfix] = operatorInStack;
+                    ++indexOfPostfix;
+                    postfix[indexOfPostfix] = ' ';
+                    ++indexOfPostfix;
+                    operatorInStack = pop(&head);
+                }
+                break;
+            }
+            }
         }
     }
     while (!isEmpty(head))
@@ -94,19 +95,18 @@ void convertToPostfix(char postfix[], char infix[])
         postfix[indexOfPostfix] = ' ';
         ++indexOfPostfix;
     }
+    deleteStack(&head);
 }
+
 
 bool isPassed()
 {
-    char stringTestOne[200] = "(1 + 2 + 3 + 4 + 5) * 2 / 2";
     char resultTestOne[200] = { '\0' };
-    convertToPostfix(resultTestOne, stringTestOne);
-    char stringTestTwo[200] = "2 * 2 + 1 + 3 - (5 + 5)";
+    convertToPostfix(resultTestOne, "(1 + 2 + 3 + 4 + 5) * 2 / 2");
     char resultTestTwo[200] = { '\0' };
-    convertToPostfix(resultTestTwo, stringTestTwo);
-    char stringTestThree[200] = "5 * 7 + 1 + 2";
+    convertToPostfix(resultTestTwo, "2 * 2 + 1 + 3 - (5 + 5)");
     char resultTestThree[200] = { '\0' };
-    convertToPostfix(resultTestThree, stringTestThree);
+    convertToPostfix(resultTestThree, "5 * 7 + 1 + 2");
     return
         strcmp(resultTestOne, "1 2 + 3 + 4 + 5 + 2 * 2 / ") == 0 &&
         strcmp(resultTestTwo, "2 2 * 1 + 3 + 5 5 + - ") == 0 &&
