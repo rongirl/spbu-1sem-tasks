@@ -2,4 +2,5 @@
 
 #include <stdbool.h>
 
+// проверка всех тестов 
 bool areTestsPassing();
