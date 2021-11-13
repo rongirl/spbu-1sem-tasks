@@ -8,9 +8,6 @@ typedef struct List List;
 // структура позиций элементов
 typedef struct Position Position;
 
-// структура элемента из списка
-typedef struct ListElement ListElement;
-
 // создание листа
 List* createList();
 
@@ -25,9 +22,6 @@ void add(List* list, int value);
 
 // распечатывание списка, принимает список 
 void printList(List* list);
-
-// начальный вывод
-void begin();
 
 // возвращает позицию первого элемента
 Position* first(List* list);

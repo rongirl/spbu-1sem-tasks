@@ -3,6 +3,14 @@
 #include <locale.h>
 #include "testList.h"
 
+void begin()
+{
+    printf("Введите число:\n");
+    printf("0 – выйти\n");
+    printf("1 – добавить значение в сортированный список\n");
+    printf("2 – удалить значение из списка\n");
+    printf("3 – распечатать список\n");
+}
 
 int main()
 {   

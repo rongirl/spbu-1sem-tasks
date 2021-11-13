@@ -39,7 +39,7 @@ bool deleteValue(List* list, int value)
 {
     ListElement* currentElement = list->head;
     ListElement* previousElement = NULL;
-    while (currentElement != NULL && currentElement->value != value)
+    while (currentElement != NULL && currentElement->value <= value)
     {
         previousElement = currentElement;
         currentElement = currentElement->next;
@@ -111,15 +111,6 @@ bool last(Position* position)
 int get(List* list, Position* position)
 {
     return position->position->value;
-}
-
-void begin()
-{   
-    printf("¬ведите число:\n");
-    printf("0 Ц выйти\n");
-    printf("1 Ц добавить значение в сортированный список\n");
-    printf("2 Ц удалить значение из списка\n");
-    printf("3 Ц распечатать список\n");
 }
 
 bool isEmpty(List* list)
