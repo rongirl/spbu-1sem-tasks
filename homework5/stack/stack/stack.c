@@ -46,4 +46,3 @@ void deleteStack(StackElement** head)
         pop(head);
     }
 }
-
