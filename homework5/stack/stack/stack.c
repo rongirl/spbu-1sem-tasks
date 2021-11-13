@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "stack.h"
@@ -15,7 +14,7 @@ void push(StackElement** head, int number)
     StackElement* newElement = calloc(1, sizeof(StackElement));
     if (newElement == NULL)
     {
-        return;
+        return NULL;
     }
     newElement->value = number;
     newElement->next = *head;
@@ -24,9 +23,9 @@ void push(StackElement** head, int number)
 
 int pop(StackElement** head)
 {
-    if (*head == NULL || head == NULL)
+    if (head == NULL || *head == NULL)
     {
-        return -1000;
+        return NULL;
     }
     StackElement* temporary = *head;
     int value = temporary->value;
