@@ -102,3 +102,77 @@ char* getValue(Node** root, int key)
     }
     return searchNode->value;
 }
+
+void deleteNode(Node* root)
+{
+    if (root == NULL)
+    {
+        return NULL;
+    }
+    if (root->leftSon != NULL && root->rightSon != NULL)
+    {
+        Node* maximum = root->leftSon;
+        while (maximum->rightSon != NULL)
+        {
+            maximum = maximum->rightSon;
+        }
+        root->key = maximum->key;
+        root->value = maximum->value;
+        deleteNode(maximum);
+        return;
+    }
+    else if (root->leftSon != NULL)
+    {   
+        if (root->parent == NULL)
+        {
+            root->key = root->leftSon->key;
+            root->value = root->leftSon->value;
+            root->leftSon->parent = NULL;
+        }
+        else if (root == root->parent->leftSon) 
+        {
+            root->parent->leftSon = root->leftSon;
+        }
+        else 
+        {
+            root->parent->rightSon = root->leftSon;
+        }
+    }
+    else if (root->rightSon != NULL)
+    {   
+        if (root->parent == NULL)
+        {
+            root->key = root->rightSon->key;
+            root->value = root->rightSon->value;
+            root->rightSon->parent = NULL;
+        } 
+        else if (root == root->parent->rightSon) 
+        {
+            root->parent->rightSon = root->rightSon;
+        }
+        else 
+        {
+            root->parent->leftSon = root->rightSon;
+        }
+    }
+    else 
+    {
+        if (root == root->parent->leftSon) 
+        {
+            root->parent->leftSon = NULL;
+        }
+        else 
+        {
+            root->parent->rightSon = NULL;
+        }
+    }
+    free(root);
+}
+
+
+
+void deleteValue(Node* root, int key)
+{
+    Node* current = search(root, key);
+    deleteNode(current);
+}
