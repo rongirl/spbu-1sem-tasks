@@ -39,7 +39,7 @@ bool deleteValue(List* list, int value)
 {
     ListElement* currentElement = list->head;
     ListElement* previousElement = NULL;
-    while (currentElement != NULL && currentElement->value <= value)
+    while (currentElement != NULL && currentElement->value != value)
     {
         previousElement = currentElement;
         currentElement = currentElement->next;
