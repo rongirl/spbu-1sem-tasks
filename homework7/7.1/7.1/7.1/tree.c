@@ -26,7 +26,9 @@ Node* addValue(Node* root, int key, char* value)
     {
         Node* newRoot = calloc(1, sizeof(Node));
         newRoot->key = key;
-        newRoot->value = value;
+        char* newValue = calloc(1, sizeof(char*));
+        strcpy(newValue, value);
+        newRoot->value = newValue;
         return newRoot;
     }
     Node* i = root;
@@ -38,7 +40,9 @@ Node* addValue(Node* root, int key, char* value)
             {
                 Node* newRoot = calloc(1, sizeof(Node));
                 newRoot->key = key;
-                newRoot->value = value;
+                char* newValue = calloc(strlen(value) + 1, sizeof(char));
+                strcpy(newValue, value);
+                newRoot->value = newValue;
                 i->rightSon = newRoot;
                 newRoot->parent = i;
                 return root;
@@ -47,7 +51,9 @@ Node* addValue(Node* root, int key, char* value)
         }
         else if (key == i->key)
         {
-            i->value = value;
+            char* newValue = calloc(strlen(value) + 1, sizeof(char));
+            strcpy(newValue, value);
+            i->value = newValue;
             return root;
         }
         else
@@ -56,7 +62,9 @@ Node* addValue(Node* root, int key, char* value)
             {
                 Node* newRoot = calloc(1, sizeof(Node));
                 newRoot->key = key;
-                newRoot->value = value;
+                char* newValue = calloc(strlen(value) + 1, sizeof(char));
+                strcpy(newValue, value);
+                newRoot->value = newValue;
                 i->leftSon = newRoot;
                 newRoot->parent = i;
                 return root;
