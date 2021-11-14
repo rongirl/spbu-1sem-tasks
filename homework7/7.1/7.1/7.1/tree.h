@@ -14,6 +14,6 @@ char* getValue(Node** root, int key);
 
 bool inTree(Node** root, int key);
 
-void deleteNode(Node* root);
-
 void deleteValue(Node* root, int key);
+
+void deleteTree(Node** root);

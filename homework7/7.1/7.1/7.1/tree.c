@@ -169,10 +169,25 @@ void deleteNode(Node* root)
     free(root);
 }
 
-
-
 void deleteValue(Node* root, int key)
 {
     Node* current = search(root, key);
     deleteNode(current);
+}
+
+void deleteTreeRecursive(Node* root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    deleteTreeRecursive(root->leftSon);
+    deleteTreeRecursive(root->rightSon);
+    free(root);
+}
+
+void deleteTree(Node** root)
+{
+    deleteTreeRecursive(*root);
+    *root = NULL;
 }
