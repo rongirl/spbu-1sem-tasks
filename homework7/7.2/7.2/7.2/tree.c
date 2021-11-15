@@ -1,4 +1,6 @@
 #include "tree.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct Node
 {
@@ -98,3 +100,25 @@ int calculate(Node* root)
     return calculateRecursive(root);
 }
 
+void printTreeRecursive(Node* root)
+{
+    if (root->leftSon == NULL && root->rightSon == NULL)
+    {
+        printf("%d", root->operand);
+    }
+    printf("( %c ", root->operation);
+    printTreeRecursive(root->leftSon);
+    printf(" ");
+    printTreeRecursive(root->rightSon);
+    printf(" )");
+    return;
+}
+
+void printTree(Node* root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    printTreeRecursive(root);
+}
