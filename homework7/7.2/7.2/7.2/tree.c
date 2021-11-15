@@ -62,3 +62,39 @@ Node* createNewNode(char* string, int* index)
     }
     return newNode;
 }
+
+int calculateRecursive(Node* node)
+{
+    if (node->leftSon == NULL && node->rightSon == NULL)
+    {
+        return node->operand;
+    }
+    const int operandOne = calculateRecursive(node->leftSon);
+    const int operandTwo = calculateRecursive(node->rightSon);
+    char operation = node->operation;
+    switch (operation)
+    {
+        case '+':
+        {
+            return operandOne + operandTwo;
+        }
+        case '-':
+        {
+            return operandOne - operandTwo;
+        }
+        case '*':
+        {
+            return operandOne * operandTwo;
+        }
+        case '/':
+        {
+            return operandOne / operandTwo;
+        }
+    }
+}
+
+int calculate(Node* root)
+{
+    return calculateRecursive(root);
+}
+
