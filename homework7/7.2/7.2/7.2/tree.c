@@ -9,7 +9,6 @@ typedef struct Node
     struct Node* leftSon;
     struct Node* rightSon;
     struct Node* parent;
-
 } Node;
 
 Node* createTree()
@@ -40,6 +39,7 @@ int getNumber(char* string, int* index)
     while (string[*index] >= '0' && string[*index] <= '9')
     {
         number = 10 * number + (string[*index] - ' 0');
+        ++(*index);
     }
     return number;
 }
@@ -63,6 +63,14 @@ Node* createNewNode(char* string, int* index)
         newNode->operand = getNumber(string, index);
     }
     return newNode;
+}
+
+Node* makeTree(char* string)
+{
+    int index = -1;
+    Node* tree = createTree();
+    tree = createNewNode(string, &index);
+    return tree;
 }
 
 int calculateRecursive(Node* node)
@@ -104,7 +112,8 @@ void printTreeRecursive(Node* root)
 {
     if (root->leftSon == NULL && root->rightSon == NULL)
     {
-        printf("%d", root->operand);
+        printf("%d ", root->operand);
+        return;
     }
     printf("( %c ", root->operation);
     printTreeRecursive(root->leftSon);

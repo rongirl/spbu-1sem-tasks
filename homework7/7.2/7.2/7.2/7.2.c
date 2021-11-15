@@ -3,7 +3,10 @@
 
 int main()
 {
-    Node* tree = createTree();
     char string[200] = { '\0' };
     scanf("%s", &string);
+    Node* tree = makeTree(string);
+    printTree(tree);
+    printf("%d", calculate(tree));
+
 }
