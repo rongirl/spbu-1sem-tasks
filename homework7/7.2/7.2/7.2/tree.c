@@ -50,7 +50,8 @@ int getNumber(char* string, int* index)
 Node* createNewNode(char* string, int* index)
 {
     ++(*index);
-    while (string[*index] == '(' || string[*index] == ')' || string[*index] == ' ')
+    int length = strlen(string);
+    while ((string[*index] == '(' || string[*index] == ')' || string[*index] == ' ' ) && string[*index] != length)
     {
         ++(*index);
     }
@@ -114,16 +115,13 @@ int calculate(Node* root)
 void printTreeRecursive(Node* root)
 {
     if (root->leftSon == NULL && root->rightSon == NULL)
-    {
-        printf("%d ", root->operand);
+    {   
+        printf("%d", root->operand);
         return;
     }
-    printf("( %c ", root->operation);
+    printf("%c", root->operation);
     printTreeRecursive(root->leftSon);
-    printf(" ");
     printTreeRecursive(root->rightSon);
-    printf(" )");
-    return;
 }
 
 void printTree(Node* root)
