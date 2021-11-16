@@ -15,3 +15,5 @@ int calculate(Node* root);
 void printTree(Node* root);
 
 Node* makeTree(char* string);
+
+int getNumber(char* string, int* index);

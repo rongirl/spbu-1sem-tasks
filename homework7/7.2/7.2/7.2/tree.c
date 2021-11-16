@@ -1,6 +1,7 @@
 #include "tree.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct Node
 {
@@ -36,9 +37,11 @@ void deleteTree(Node** root)
 int getNumber(char* string, int* index)
 {
     int number = 0;
-    while (string[*index] >= '0' && string[*index] <= '9')
+    int length = strlen(string);
+    while (string[*index] >= '0' && string[*index] <= '9' && (*index) < length)
     {
-        number = 10 * number + (string[*index] - ' 0');
+        int current = string[*index] - '0';
+        number = number * 10 + current;
         ++(*index);
     }
     return number;
