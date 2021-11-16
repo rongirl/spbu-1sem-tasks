@@ -119,9 +119,12 @@ void printTreeRecursive(Node* root)
         printf("%d", root->operand);
         return;
     }
-    printf("%c", root->operation);
+    printf("( %c ", root->operation);
     printTreeRecursive(root->leftSon);
+    printf(" ");
     printTreeRecursive(root->rightSon);
+    printf(" ");
+    printf(" ) ");
 }
 
 void printTree(Node* root)
