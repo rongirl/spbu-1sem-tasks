@@ -11,13 +11,15 @@ bool areTestsPassed()
     add(list, 8);
     if (get(list, first(list)) == 9)
     {
+        deleteList(list);
         return false;
     }
     add(list, 9);
     add(list, 1);
     add(list, 100);
     if (!checkSort(list))
-    {
+    {   
+        deleteList(list);
         return false;
     }
     deleteValue(list, 8);
@@ -26,6 +28,7 @@ bool areTestsPassed()
     deleteValue(list, 100);
     if (isEmpty(list))
     {
+        deleteList(list);
         return true;
     }
     deleteList(list);
@@ -38,7 +41,6 @@ bool checkSort(List* list)
     for (Position* i = first(list); !last(i); i = next(i))
     {
         ++length;
-
     }
     int lengthSortedElements = 0;
     for (Position* i = first(list); !last(i); i = next(i))
