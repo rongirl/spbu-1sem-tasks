@@ -9,8 +9,9 @@ bool areTestsPassed()
         return false;
     }
     add(list, 6);
-    if (!isInListOneElement)
-    {
+    if (!isInListOneElement(list))
+    {   
+        deleteList(list);
         return false;
     }
     if (getValue(list) != 6)
@@ -21,7 +22,8 @@ bool areTestsPassed()
     deleteValue(list, 1);
     deleteValue(list, 1);
     if (!isEmpty(list))
-    {
+    {   
+        deleteList(list);
         return false;
     }
     return true;
