@@ -38,6 +38,7 @@ bool checkSort(List* list)
     for (Position* i = first(list); !last(i); i = next(i))
     {
         ++length;
+
     }
     int lengthSortedElements = 0;
     for (Position* i = first(list); !last(i); i = next(i))

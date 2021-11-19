@@ -97,19 +97,19 @@ Position* first(List* list)
 }
 
 Position* next(Position* position)
-{
+{   
     Position* newPosition = malloc(sizeof(Position));
     newPosition->position = position->position->next;
     return newPosition;
 }
 
 bool last(Position* position)
-{
+{   
     return position->position == NULL;
 }
 
 int get(List* list, Position* position)
-{
+{   
     return position->position->value;
 }
 
