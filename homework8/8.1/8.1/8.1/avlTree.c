@@ -50,3 +50,18 @@ int getHeight(Node* root)
     }
     return getHeightRecursive(root);
 }
+
+int calculateBalance(Node* node)
+{
+    int heightLeft = 0;
+    int heightRight = 0;
+    if (node->rightSon != NULL)
+    {
+        heightRight = getHeight(node->rightSon);
+    }
+    if (node->leftSon != NULL)
+    {
+        heightLeft = getHeight(node->leftSon);
+    }
+    return heightRight - heightLeft;
+}
