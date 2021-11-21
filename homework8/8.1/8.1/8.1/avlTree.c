@@ -71,5 +71,8 @@ Node* leftRotate(Node* root)
     Node* pivot = root->rightSon;
     root->rightSon = pivot->leftSon;
     pivot->leftSon = root;
+    root->balance = calculateBalance(root);
+    pivot->balance = calculateBalance(pivot);
     return pivot;
 }
+
