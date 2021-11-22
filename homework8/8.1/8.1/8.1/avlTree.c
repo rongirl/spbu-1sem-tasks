@@ -76,3 +76,31 @@ Node* leftRotate(Node* root)
     return pivot;
 }
 
+Node* rightRotate(Node* root)
+{
+    Node* pivot = root->leftSon;
+    root->leftSon = pivot->rightSon;
+    pivot->rightSon = root;
+    root->balance = calculateBalance(root);
+    pivot->balance = calculateBalance(pivot);
+    return pivot;
+}
+
+void deleteTreeRecutsive(Node* root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    deleteTreeRecursive(root->leftSon);
+    deleteTreeRecursive(root->rightSon);
+    free(root);
+}
+
+void deleteTree(Node** root)
+{
+    deleteTreeRecursive(*root);
+    *root = NULL;
+}
+
+

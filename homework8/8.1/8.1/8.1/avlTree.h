@@ -10,3 +10,8 @@ Node* createTree();
 bool isEmpty(Node* root);
 
 int getHeight(Node* node);
+
+void deleteTreeRecursive(Node* root);
+
+
+v
