@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct Node Node;
 
@@ -13,5 +14,8 @@ int getHeight(Node* node);
 
 void deleteTreeRecursive(Node* root);
 
+void deleteTree(Node** root);
 
-v
+char* getValue(Node** root, int key);
+
+Node* addValue(Node* root, int key, char* value);
