@@ -210,3 +210,55 @@ Node* addValue(Node* root, int key, char* value)
     root = insert(root, key, newValue);
     root = balance(root);
 }
+
+Node* searchMin(Node* node)
+{
+    if (node->leftSon != NULL)
+    {
+        return searchMin(node->leftSon);
+    }
+    return node;
+}
+
+Node* deleteMin(Node* node)
+{
+    if (node->leftSon == NULL)
+    {
+        return node->rightSon;
+    }
+    node->leftSon = deleteMin(node->leftSon);
+    return balance(node);
+}
+
+Node* deleteNode(Node* root, int key)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    if (key < root->key)
+    {
+        root->leftSon = deleteNode(root->leftSon, key);
+    }
+    else if (key > root->key)
+    {
+        root->rightSon = deleteNode(root->rightSon, key);
+    }
+    else
+    {
+        Node* leftSon = root->leftSon;
+        Node* rightSon = root->rightSon;
+        free(root->value);
+        free(root);
+        if (rightSon == NULL)
+        {
+            return leftSon;
+        }
+        Node* minimum = searchMin(rightSon);
+        minimum->rightSon = deleteMin(rightSon);
+        minimum->leftSon = leftSon;
+        return balance(minimum);
+    }
+    return balance(root);
+}
+

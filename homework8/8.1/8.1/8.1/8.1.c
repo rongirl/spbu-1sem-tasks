@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "avlTree.h"
 
+
+
 int main()
 {
     Node* tree = createTree();
@@ -10,5 +12,8 @@ int main()
     tree = addValue(tree, 2, "ppp");
     tree = addValue(tree, 1, "ddd");
     tree = addValue(tree, 0, "qqq");
+    tree = deleteNode(tree, 7);
+    tree = deleteNode(tree, 7);
+
     deleteTree(&tree);
 }
