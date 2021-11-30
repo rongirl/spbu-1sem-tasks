@@ -230,7 +230,7 @@ Node* deleteMin(Node* node)
     return balance(node);
 }
 
-Node* deleteNode(Node* root, int key)
+Node* deleteValue(Node* root, int key)
 {
     if (root == NULL)
     {
@@ -238,11 +238,11 @@ Node* deleteNode(Node* root, int key)
     }
     if (key < root->key)
     {
-        root->leftSon = deleteNode(root->leftSon, key);
+        root->leftSon = deleteValue(root->leftSon, key);
     }
     else if (key > root->key)
     {
-        root->rightSon = deleteNode(root->rightSon, key);
+        root->rightSon = deleteValue(root->rightSon, key);
     }
     else
     {

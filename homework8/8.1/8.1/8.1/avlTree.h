@@ -20,6 +20,6 @@ char* getValue(Node** root, int key);
 
 Node* addValue(Node* root, int key, char* value);
 
-Node* deleteNode(Node* root, int key);
+Node* deleteValue(Node* root, int key);
 
 bool inTree(Node** root, int key);
