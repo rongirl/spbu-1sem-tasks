@@ -17,6 +17,7 @@ bool areTestsPassed()
     }
     if (getValue(list) != 6)
     {
+        deleteList(list);
         return false;
     }
     add(list, 8);
