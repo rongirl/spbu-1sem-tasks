@@ -61,8 +61,13 @@ int getValue(List* list)
     return list->head->value;
 }
 
-void deleteList(List* list)
+bool isEmpty(List* list)
 {
+    return list->head == NULL;
+}
+
+void deleteList(List* list)
+{   
     while (list->head != list->tail)
     {
         deleteValue(list, 1);
@@ -71,7 +76,4 @@ void deleteList(List* list)
     free(list);
 }
 
-bool isEmpty(List* list)
-{
-    return list->head == NULL;
-}
+

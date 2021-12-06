@@ -5,7 +5,8 @@ bool areTestsPassed()
 {
     List* list = createList();
     if (!isEmpty(list))
-    {
+    {    
+        deleteList(list);
         return false;
     }
     add(list, 6);
@@ -26,5 +27,6 @@ bool areTestsPassed()
         deleteList(list);
         return false;
     }
+    free(list);
     return true;
 }

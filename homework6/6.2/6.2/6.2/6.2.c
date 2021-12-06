@@ -35,7 +35,7 @@ int main()
         printf(":(");
         return -1;
     }
-    printf("¬ведите количество войнов и частоту убийства: ");
+    printf("¬ведите количество воинов и частоту убийства: ");
     int countOfWarriors = 0;
     int frequency = 0;
     scanf("%d %d", &countOfWarriors, &frequency);
