@@ -39,5 +39,5 @@ int main()
     int countOfWarriors = 0;
     int frequency = 0;
     scanf("%d %d", &countOfWarriors, &frequency);
-    printf("Позиция последего война: %d", countPosition(countOfWarriors, frequency));
+    printf("Позиция последего воина: %d", countPosition(countOfWarriors, frequency));
 }
