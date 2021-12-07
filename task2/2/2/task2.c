@@ -66,6 +66,5 @@ int main()
         }
     }
     bool used[100] = { false };
-    m(matrix);
-  //  printf("%d", countOfComponents(countOfNodes, used, matrix, countOfEdges));
+    // :(
 }
