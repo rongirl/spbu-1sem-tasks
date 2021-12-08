@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdbool.h>
-#include <string.h>
 
 typedef struct Node Node;
 
@@ -21,7 +20,8 @@ char* getValue(Node** root, int key);
 bool inTree(Node** root, int key);
 
 // удаление значения
-void deleteValue(Node* root, int key);
+void deleteValue(Node** root, int key);
 
 // удаление дерева
-void deleteTree(Node** root);
+void deleteTree(Node* root);
+

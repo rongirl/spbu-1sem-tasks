@@ -1,5 +1,6 @@
 #include "tree.h"
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct Node
 {
@@ -26,7 +27,7 @@ Node* addValue(Node* root, int key, char* value)
     {
         Node* newRoot = calloc(1, sizeof(Node));
         newRoot->key = key;
-        char* newValue = calloc(1, sizeof(char*));
+        char* newValue = calloc(strlen(value) + 1, sizeof(char));
         strcpy(newValue, value);
         newRoot->value = newValue;
         return newRoot;
@@ -53,6 +54,7 @@ Node* addValue(Node* root, int key, char* value)
         {
             char* newValue = calloc(strlen(value) + 1, sizeof(char));
             strcpy(newValue, value);
+            free(i->value);
             i->value = newValue;
             return root;
         }
@@ -92,13 +94,12 @@ Node* search(Node* root, int key)
             return i;
         }
     }
-    return i;
+    return NULL;
 }
 
 bool inTree(Node** root, int key)
 {   
-    Node* searchNode = search(*root, key);
-    return searchNode != NULL;
+    return search(*root, key) != NULL;
 }
 
 char* getValue(Node** root, int key)
@@ -111,75 +112,116 @@ char* getValue(Node** root, int key)
     return searchNode->value;
 }
 
-void deleteNode(Node* root)
+Node* findMaximum(Node* node)
 {
-    if (root == NULL)
+    Node* maximum = node->leftSon;
+    while (maximum->rightSon != NULL)
     {
-        return NULL;
+        maximum = maximum->rightSon;
     }
-    if (root->leftSon != NULL && root->rightSon != NULL)
+    return maximum;
+}
+
+void deleteNode(Node* node)
+{
+    if (node->leftSon != NULL && node->rightSon != NULL)
     {
-        Node* maximum = root->leftSon;
-        while (maximum->rightSon != NULL)
-        {
-            maximum = maximum->rightSon;
-        }
-        root->key = maximum->key;
-        root->value = maximum->value;
+        Node* maximum = findMaximum(node);
+        node->key = maximum->key;
+        char* newValue = calloc(strlen(maximum->value) + 1, sizeof(char));
+        strcpy(newValue, maximum->value);
+        node->value = newValue;
         deleteNode(maximum);
         return;
     }
-    else if (root->leftSon != NULL)
+    else if (node->leftSon != NULL)
     {   
-        if (root->parent == NULL)
+        if (node == node->parent->leftSon) 
         {
-            root->key = root->leftSon->key;
-            root->value = root->leftSon->value;
-            root->leftSon->parent = NULL;
-        }
-        else if (root == root->parent->leftSon) 
-        {
-            root->parent->leftSon = root->leftSon;
+            node->parent->leftSon = node->leftSon;
         }
         else 
         {
-            root->parent->rightSon = root->leftSon;
+            node->parent->rightSon = node->leftSon;
         }
     }
-    else if (root->rightSon != NULL)
+    else if (node->rightSon != NULL)
     {   
-        if (root->parent == NULL)
+        if (node == node->parent->rightSon) 
         {
-            root->key = root->rightSon->key;
-            root->value = root->rightSon->value;
-            root->rightSon->parent = NULL;
-        } 
-        else if (root == root->parent->rightSon) 
-        {
-            root->parent->rightSon = root->rightSon;
+            node->parent->rightSon = node->rightSon;
         }
         else 
         {
-            root->parent->leftSon = root->rightSon;
+            node->parent->leftSon = node->rightSon;
         }
     }
     else 
     {
-        if (root == root->parent->leftSon) 
+        if (node == node->parent->leftSon) 
         {
-            root->parent->leftSon = NULL;
+            node->parent->leftSon = NULL;
         }
         else 
         {
-            root->parent->rightSon = NULL;
+            node->parent->rightSon = NULL;
         }
     }
-    free(root);
+    free(node->value);
+    free(node);
 }
 
-void deleteValue(Node* root, int key)
-{
-    Node* current = search(root, key);
+Node* deleteRoot(Node* root)
+{   
+    Node* newRoot = calloc(1, sizeof(Node));
+    if (root->leftSon != NULL && root->rightSon != NULL)
+    {
+        Node* maximum = findMaximum(root);
+        newRoot->key = maximum->key;
+        char* newValue = calloc(strlen(maximum->value) + 1, sizeof(char));
+        strcpy(newValue, maximum->value);
+        newRoot->value = newValue;
+        deleteNode(maximum);
+        newRoot->leftSon = root->leftSon;
+        newRoot->rightSon = root->rightSon;
+        if (root->leftSon != NULL)
+        {
+            root->leftSon->parent = newRoot;
+        }
+        if (root->rightSon != NULL)
+        {
+            root->rightSon->parent = newRoot;
+        }
+    }
+    else if (root->rightSon == NULL)
+    {
+        newRoot = root->leftSon;
+    }
+    else
+    {
+        newRoot = root->rightSon;
+    }
+    free(root->value);
+    free(root);
+    return newRoot;
+}
+
+void deleteValue(Node** root, int key)
+{   
+    if (isEmpty(*root))
+    {
+        return;
+    }
+    Node* current = search(*root, key);
+    if (current == NULL)
+    {
+        return;
+    }
+    if (current->parent == NULL)
+    {
+        (*root) = deleteRoot(current);
+        return;
+    }
     deleteNode(current);
 }
 

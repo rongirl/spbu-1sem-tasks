@@ -40,11 +40,12 @@ int main()
     if (!areTestsPassed())
     {
         printf(":(");
+        return -1;
     }
     begin();
     Node* tree = createTree();
-    bool isNotNull = true;
-    while (isNotNull)
+    bool shallContinue = true;
+    while (shallContinue)
     {
         char input = '\0';
         scanf("%c", &input);
@@ -52,7 +53,7 @@ int main()
         {
             case '0':
             {
-                isNotNull = false;
+                shallContinue = false;
                 deleteTree(&tree);
                 break;
             }
@@ -105,10 +106,17 @@ int main()
                     printf("Ключ не найден\n");
                     break;
                 }
-                deleteValue(tree, key);
+                deleteValue(&tree, key);
                 printf("Ключ и значение удалены\n");
                 break;
             }
         }
     }
+   /* Node* tree = createTree();
+    tree = addValue(tree, 5, "a");
+    tree = addValue(tree, 6, "b");
+    tree = addValue(tree, 4, "c");
+    tree = addValue(tree, 2, "d");
+    deleteValue(&tree, 5);
+    */
 }
