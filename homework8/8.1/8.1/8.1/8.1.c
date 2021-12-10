@@ -45,7 +45,7 @@ bool areTestsPassed()
 
 int main()
 {   
-    setlocale(LC_ALL, "rus");
+   /* setlocale(LC_ALL, "rus");
     begin();
     Node* tree = createTree();
     bool shallContinue = true;
@@ -116,5 +116,16 @@ int main()
         }
         }
     }
+    */
+    Node* tree = createTree();
+    tree = addValue(tree, 4, "q");
+    tree = addValue(tree, 18, "a");
+    tree = addValue(tree, 16, "b");
+    tree = addValue(tree, 14, "c");
+    tree = addValue(tree, 10, "d");
+    tree = addValue(tree, 3, "e");
+    tree = addValue(tree, 1, "s");
+    tree = deleteValue(tree, 10);
+
     deleteTree(&tree);
 }

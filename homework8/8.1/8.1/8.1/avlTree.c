@@ -183,12 +183,10 @@ Node* insert(Node* node, int key, char* value)
     if (node->key < key)
     {
         node->rightSon = insert(node->rightSon, key, value);
-        node->rightSon = balance(node->rightSon);
     }
     if (node->key > key)
     {
         node->leftSon = insert(node->leftSon, key, value);
-        node->leftSon = balance(node->leftSon);
     }
     return balance(node);
 }
