@@ -24,4 +24,3 @@ void deleteValue(Node** root, int key);
 
 // удаление дерева
 void deleteTree(Node* root);
-
