@@ -21,16 +21,21 @@ bool isEmpty(Node* root)
     return root == NULL;
 }
 
+Node* createNode(int key, char* value)
+{
+    Node* newNode = calloc(1, sizeof(Node));
+    newNode->key = key;
+    char* newValue = calloc(strlen(value) + 1, sizeof(char));
+    strcpy(newValue, value);
+    newNode->value = newValue;
+    return newNode;
+}
+
 Node* addValue(Node* root, int key, char* value)
 {
     if (isEmpty(root))
     {
-        Node* newRoot = calloc(1, sizeof(Node));
-        newRoot->key = key;
-        char* newValue = calloc(strlen(value) + 1, sizeof(char));
-        strcpy(newValue, value);
-        newRoot->value = newValue;
-        return newRoot;
+        return createNode(key, value);
     }
     Node* i = root;
     while (i != NULL)
@@ -39,13 +44,9 @@ Node* addValue(Node* root, int key, char* value)
         {
             if (i->rightSon == NULL)
             {
-                Node* newRoot = calloc(1, sizeof(Node));
-                newRoot->key = key;
-                char* newValue = calloc(strlen(value) + 1, sizeof(char));
-                strcpy(newValue, value);
-                newRoot->value = newValue;
-                i->rightSon = newRoot;
-                newRoot->parent = i;
+                Node* newNode = createNode(key, value);
+                i->rightSon = newNode;
+                newNode->parent = i;
                 return root;
             }
             i = i->rightSon;
@@ -56,19 +57,16 @@ Node* addValue(Node* root, int key, char* value)
             strcpy(newValue, value);
             free(i->value);
             i->value = newValue;
+            free(newValue);
             return root;
         }
         else
         {
             if (i->leftSon == NULL)
             {
-                Node* newRoot = calloc(1, sizeof(Node));
-                newRoot->key = key;
-                char* newValue = calloc(strlen(value) + 1, sizeof(char));
-                strcpy(newValue, value);
-                newRoot->value = newValue;
-                i->leftSon = newRoot;
-                newRoot->parent = i;
+                Node* newNode = createNode(key, value);
+                i->leftSon = newNode;
+                newNode->parent = i;
                 return root;
             }
             i = i->leftSon;
