@@ -116,7 +116,7 @@ Node* search(Node* root, const char* key)
 {
     Node* i = root;
     while (i != NULL)
-    {
+    {  
         if (strcmp(key, i->key) > 0)
         {
             i = i->rightSon;
@@ -156,7 +156,7 @@ Node* balance(Node* node)
 }
 
 bool inTree(Dictionary** tree, const char* key)
-{
+{   
     return search((*tree)->root, key) != NULL;
 }
 

@@ -11,38 +11,42 @@ void begin()
     printf("4 - удалить заданный ключ и связанное с ним значение из словаря.\n");
 }
 
-/*bool areTestsPassed()
+bool areTestsPassed()
 {
     Dictionary* tree = createTree();
-    addValue(tree, 9, "a");
-    addValue(tree, 7, "i");
-    addValue(tree, 8, "p");
-    addValue(tree, 1, "u");
-    addValue(tree, 6, "q");
-    addValue(tree, 4, "w");
-    bool sevenInTree = inTree(&tree, 7);
-    bool fifeInTree = inTree(&tree, 5);
-    if (strcmp(getValue(&tree, 9), "a") != 0)
+    addValue(tree, "9", "a");
+    addValue(tree, "7", "i");
+    addValue(tree, "8", "p");
+    addValue(tree, "1", "u");
+    addValue(tree, "6", "q");
+    addValue(tree, "4", "w");
+    bool sevenInTree = inTree(&tree, "7");
+    bool fiveInTree = inTree(&tree, "5");
+    if (strcmp(getValue(&tree, "9"), "a") != 0)
     {
         deleteTree(&tree);
         return false;
     }
-    addValue(tree, 9, "b");
-    if (strcmp(getValue(&tree, 9), "b") != 0)
+    addValue(tree, "9", "b");
+    if (strcmp(getValue(&tree, "9"), "b") != 0)
     {
         deleteTree(&tree);
         return false;
     }
-    deleteValue(tree, 8);
-    bool eightInTree = inTree(&tree, 8);
-    deleteValue(&tree, 100);
-
-    return ;
+    deleteValue(&tree, "8");
+    bool eightInTree = inTree(&tree, "8");
+    deleteTree(&tree);
+    return !eightInTree && sevenInTree && !fiveInTree;
 }
-*/
+
 int main()
 {   
     setlocale(LC_ALL, "rus");
+    if (!areTestsPassed())
+    {
+        printf(":(");
+        return -1;
+    }
     begin();
     Dictionary* tree = createTree();
     bool shallContinue = true;
