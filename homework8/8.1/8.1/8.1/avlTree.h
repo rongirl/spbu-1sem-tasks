@@ -1,25 +1,19 @@
 #pragma once 
 
 #include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
 
-typedef struct Node Node;
+typedef struct Dictionary Dictionary;
 
-Node* createTree();
+Dictionary* createTree();
 
-bool isEmpty(Node* root);
+bool isEmpty(Dictionary* tree);
 
-int getHeight(Node* node);
+void deleteTree(Dictionary** tree);
 
-void deleteTreeRecursive(Node* root);
+const char* getValue(Dictionary** tree, const char* key);
 
-void deleteTree(Node** root);
+void addValue(Dictionary* tree, const char* key, const char* value);
 
-char* getValue(Node** root, int key);
+void deleteValue(Dictionary** tree, const char* key);
 
-Node* addValue(Node* root, int key, char* value);
-
-Node* deleteValue(Node* root, int key);
-
-bool inTree(Node** root, int key);
+bool inTree(Dictionary** tree, const char* key);

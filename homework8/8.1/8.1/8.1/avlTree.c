@@ -1,22 +1,29 @@
 #include "avlTree.h"
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct Node
 {
-    int key;
-    char* value;
+    const char* key;
+    const char* value;
     struct Node* leftSon;
     struct Node* rightSon;
     int balance;
 } Node;
 
-Node* createTree()
+typedef struct Dictionary
 {
-    return NULL;
+    Node* root;
+} Dictionary;
+
+Dictionary* createTree()
+{
+    return calloc(1, sizeof(Dictionary));;
 }
 
-bool isEmpty(Node* root)
+bool isEmpty(Dictionary* tree)
 {
-    return root == NULL;
+    return tree->root == NULL;
 }
 
 int getHeightRecursive(Node* node)
@@ -42,13 +49,13 @@ int getHeightRecursive(Node* node)
     return heightRight;
 }
 
-int getHeight(Node* root)
+int getHeight(Node* node)
 {
-    if (root == NULL)
+    if (node == NULL)
     {
         return 0;
     }
-    return getHeightRecursive(root);
+    return getHeightRecursive(node);
 }
 
 int calculateBalance(Node* node)
@@ -94,25 +101,27 @@ void deleteTreeRecursive(Node* root)
     }
     deleteTreeRecursive(root->leftSon);
     deleteTreeRecursive(root->rightSon);
+    free(root->value);
     free(root);
 }
 
-void deleteTree(Node** root)
+void deleteTree(Dictionary** tree)
 {
-    deleteTreeRecursive(*root);
-    *root = NULL;
+    deleteTreeRecursive((*tree)->root);
+    free(*tree);
+    (*tree) = NULL;
 }
 
-Node* search(Node* root, int key)
+Node* search(Node* root, const char* key)
 {
     Node* i = root;
     while (i != NULL)
     {
-        if (key > i->key)
+        if (strcmp(key, i->key) > 0)
         {
             i = i->rightSon;
         }
-        else if (key < i->key)
+        else if (strcmp(key, i->key) < 0)
         {
             i = i->leftSon;
         }
@@ -121,7 +130,7 @@ Node* search(Node* root, int key)
             return i;
         }
     }
-    return i;
+    return NULL;
 }
 
 Node* balance(Node* node)
@@ -146,15 +155,14 @@ Node* balance(Node* node)
     return node;
 }
 
-bool inTree(Node** root, int key)
+bool inTree(Dictionary** tree, const char* key)
 {
-    Node* searchNode = search(*root, key);
-    return searchNode != NULL;
+    return search((*tree)->root, key) != NULL;
 }
 
-char* getValue(Node** root, int key)
+const char* getValue(Dictionary** tree, const char* key)
 {
-    Node* searchNode = search(*root, key);
+    Node* searchNode = search((*tree)->root, key);
     if (searchNode == NULL)
     {
         return NULL;
@@ -162,51 +170,66 @@ char* getValue(Node** root, int key)
     return searchNode->value;
 }
 
-Node* insert(Node* node, int key, char* value)
+Node* insert(Node* node, const char* key, const char* value)
 {
     if (node == NULL)
     {
         Node* newNode = calloc(1, sizeof(Node));
+        if (newNode == NULL)
+        {
+            return NULL;
+        }
         newNode->balance = 0;
-        newNode->key = key;
-        newNode->value = value;
+        const char* newValue = calloc(strlen(value) + 1, sizeof(char));
+        strcpy(newValue, value);
+        const char* newKey = calloc(strlen(value) + 1, sizeof(char));
+        strcpy(newKey, key);
+        newNode->value = newValue;
+        newNode->key = newKey;
         newNode->leftSon = NULL;
         newNode->rightSon = NULL;
         return newNode;
     }
-    if (node->key == key)
+    if (strcmp(node->key, key) == 0)
     {
         free(node->value);
         node->value = value;
         return;
     }
-    if (node->key < key)
+    if (strcmp(key, node->key) > 0)
     {
         node->rightSon = insert(node->rightSon, key, value);
     }
-    if (node->key > key)
+    if (strcmp(key, node->key) < 0)
     {
         node->leftSon = insert(node->leftSon, key, value);
     }
     return balance(node);
 }
 
-Node* addValue(Node* root, int key, char* value)
+void addValue(Dictionary* tree, const char* key, const char* value)
 {
-    char* newValue = calloc(strlen(value) + 1, sizeof(char));
+    const char* newValue = calloc(strlen(value) + 1, sizeof(char));
+    const char* newKey = calloc(strlen(key) + 1, sizeof(char));
+    if (newValue == NULL || newKey == NULL)
+    {
+        return NULL;
+    }
     strcpy(newValue, value);
-    if (isEmpty(root))
+    strcpy(newKey, key);
+    if (isEmpty(tree))
     {
         Node* newRoot = calloc(1, sizeof(Node));
-        newRoot->key = key;
+        newRoot->key = newKey;
         newRoot->value = newValue;
         newRoot->balance = 0;
         newRoot->leftSon = NULL;
         newRoot->rightSon = NULL;
+        tree->root = newRoot;
         return newRoot;
     }
-    root = insert(root, key, newValue);
-    root = balance(root);
+    tree->root = insert(tree->root, key, newValue);
+    tree->root = balance(tree->root);
 }
 
 Node* searchMin(Node* node)
@@ -228,19 +251,19 @@ Node* deleteMin(Node* node)
     return balance(node);
 }
 
-Node* deleteValue(Node* root, int key)
+Node* deleteNode(Node* root, const char* key)
 {
     if (root == NULL)
     {
         return 0;
     }
-    if (key < root->key)
+    if (strcmp(key, root->key) < 0)
     {
-        root->leftSon = deleteValue(root->leftSon, key);
+        root->leftSon = deleteNode(root->leftSon, key);
     }
-    else if (key > root->key)
+    else if (strcmp(key, root->key) > 0)
     {
-        root->rightSon = deleteValue(root->rightSon, key);
+        root->rightSon = deleteNode(root->rightSon, key);
     }
     else
     {
@@ -260,3 +283,15 @@ Node* deleteValue(Node* root, int key)
     return balance(root);
 }
 
+void deleteValue(Dictionary** tree, const char* key)
+{
+    if (isEmpty(*tree))
+    {
+        return;
+    }
+    if (!inTree(tree, key))
+    {
+        return;
+    }
+    (*tree)->root = deleteNode((*tree)->root, key);
+}
