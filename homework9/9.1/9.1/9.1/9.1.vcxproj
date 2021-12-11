@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="9.1.c" />
+    <ClCompile Include="hashTable.c" />
     <ClCompile Include="list.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hashTable.h" />
     <ClInclude Include="list.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
