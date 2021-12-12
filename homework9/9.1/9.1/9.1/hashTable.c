@@ -42,3 +42,44 @@ int hashFunction(const char* word, int size)
         hash = (hash + word[i]) % size;
     }
 }
+
+void printHashTable(HashTable* hashTable)
+{
+    for (int i = 0; i < hashTable->size; i++)
+    {
+        printList(hashTable->lists[i]);
+    }
+}
+
+double getFillFactor(HashTable* hashTable)
+{
+    return hashTable->fillFactor;
+}
+
+int getMaximumLength(HashTable* hashTable)
+{   
+    int maximumLength = 0;
+    for (int i = 0; i < hashTable->size; i++)
+    {   
+        int currentLengthOfList = getLengthOfList(hashTable->lists[i]);
+        if (maximumLength < currentLengthOfList)
+        {
+            maximumLength = currentLengthOfList;
+        }
+    }
+    return maximumLength;
+}
+
+int getMiddleLength(HashTable* hashTable)
+{
+
+}
+
+void deleteHashTable(HashTable* hashTable)
+{
+    for (int i = 0; i < hashTable->size; i++)
+    {
+        deleteList(hashTable->lists[i]);
+    }
+    free(hashTable);
+}
