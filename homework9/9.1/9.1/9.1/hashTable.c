@@ -1,6 +1,7 @@
 #include "hashTable.h"
 #include "list.h"
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct HashTable
 {   
@@ -30,4 +31,14 @@ HashTable* createHashTable()
         hashTable->lists[i] = createList();
     }
     return hashTable;
+}
+
+int hashFunction(const char* word, int size)
+{
+    int hash = 0;
+    int length = strlen(word);
+    for (int i = 0; i < length; i++)
+    {
+        hash = (hash + word[i]) % size;
+    }
 }
