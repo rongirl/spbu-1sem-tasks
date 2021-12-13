@@ -16,10 +16,16 @@ bool areTestsPassed()
     treeTestOne = makeTree("* (- -1 -10 ) ( + -100  90 ) ");
     treeTestTwo = makeTree("/ (* 500  2) ( - 6  7)");
     treeTestThree = makeTree("(* ( - 5 10 ) (/ ( * ( 2 9 ) 3)))");
+    bool isPassedOne = isPassed(treeTestOne, -90);
+    bool isPassedTwo = isPassed(treeTestTwo, -1000);
+    bool isPassedThree = isPassed(treeTestThree, -30);
+    deleteTree(&treeTestOne);
+    deleteTree(&treeTestTwo);
+    deleteThree(&treeTestThree);
     return
-        isPassed(treeTestOne, -90) &&
-        isPassed(treeTestTwo, -1000) &&
-        isPassed(treeTestThree, -30);
+        isPassedOne &&
+        isPassedTwo && 
+        isPassedThree;
 }
 
 int main()
