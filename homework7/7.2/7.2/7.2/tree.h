@@ -13,7 +13,7 @@ void deleteTreeRecursive(Node* root);
 void deleteTree(Node** root);
 
 // создание новой вершины
-Node* createNewNode(char* string, int* index);
+Node* createNewNode(const char* string, int* index);
 
 // вычисление выражения в дереве
 int calculate(Node* root);
@@ -22,5 +22,4 @@ int calculate(Node* root);
 void printTree(Node* root);
 
 // построение дерева
-Node* makeTree(char* string);
-
+Node* makeTree(const char* string);

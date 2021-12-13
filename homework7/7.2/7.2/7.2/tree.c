@@ -34,29 +34,35 @@ void deleteTree(Node** root)
     *root = NULL;
 }
 
-int getNumber(char* string, int* index)
+int getNumber(const char* string, int* index)
 {
     int number = 0;
     int length = strlen(string);
+    int sign = 1;
+    if (string[*index] == '-')
+    {
+        sign = -1;
+        ++(*index);
+    }
     while (string[*index] >= '0' && string[*index] <= '9' && (*index) < length)
     {
         int current = string[*index] - '0';
         number = number * 10 + current;
         ++(*index);
     }
-    return number;
+    return number * sign;
 }
 
-Node* createNewNode(char* string, int* index)
+Node* createNewNode(const char* string, int* index)
 {
     ++(*index);
     int length = strlen(string);
-    while ((string[*index] == '(' || string[*index] == ')' || string[*index] == ' ' ) && string[*index] != length)
+    while ((string[*index] == '(' || string[*index] == ')' || string[*index] == ' ') && string[*index] != length)
     {
         ++(*index);
     }
     Node* newNode = calloc(1, sizeof(Node));
-    if (string[*index] == '+' || string[*index] == '-' || string[*index] == '/' || string[*index] == '*')
+    if ((string[*index] == '+' || string[*index] == '-' || string[*index] == '/' || string[*index] == '*') && string[(*index) + 1] == ' ')
     {
         newNode->operation = string[*index];
         newNode->leftSon = createNewNode(string, index);
@@ -69,7 +75,7 @@ Node* createNewNode(char* string, int* index)
     return newNode;
 }
 
-Node* makeTree(char* string)
+Node* makeTree(const char* string)
 {
     int index = -1;
     Node* tree = createTree();
@@ -100,11 +106,8 @@ int calculateRecursive(Node* node)
         {
             return operandOne * operandTwo;
         }
-        case '/':
-        {
-            return operandOne / operandTwo;
-        }
     }
+    return operandOne / operandTwo;
 }
 
 int calculate(Node* root)
