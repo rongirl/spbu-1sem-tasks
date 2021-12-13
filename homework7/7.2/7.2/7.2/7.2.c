@@ -21,7 +21,7 @@ bool areTestsPassed()
     bool isPassedThree = isPassed(treeTestThree, -30);
     deleteTree(&treeTestOne);
     deleteTree(&treeTestTwo);
-    deleteThree(&treeTestThree);
+    deleteTree(&treeTestThree);
     return
         isPassedOne &&
         isPassedTwo && 
