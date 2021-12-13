@@ -27,6 +27,9 @@
     <ClInclude Include="hashTable.h" />
     <ClInclude Include="list.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="text.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

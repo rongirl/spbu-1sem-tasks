@@ -26,7 +26,7 @@ void printList(List* list)
     ListElement* currentElement = list->head;
     while (currentElement != NULL)
     {
-        printf("%s %d", currentElement->word, currentElement->counter);
+        printf("%s %d \n", currentElement->word, currentElement->counter);
         currentElement = currentElement->next;
     }
 }
@@ -41,7 +41,7 @@ int getLengthOfList(List* list)
     return list->length;
 }
 
-bool addInList(List* list, char const* word, int count)
+bool addInList(List* list, const char* word, int count)
 {
     ListElement* currentElement = list->head;
     ListElement* previousElement = NULL;
@@ -108,7 +108,7 @@ int getCountHead(List* list)
 }
 
 void deleteHead(List* list)
-{
+{   
     if (isEmpty(list))
     {
         return;
