@@ -3,7 +3,7 @@
 
 int main()
 {
-    char* string[100] = { '\0' };
+    char string[100] = { '\0' };
     scanf("%s", &string);
     int index = 0;
     int state = 0;
