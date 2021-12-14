@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 int main()
 {
@@ -7,7 +8,8 @@ int main()
     scanf("%s", &string);
     int index = 0;
     int state = 0;
-    while (true)
+    int length = strlen(string);
+    while (index < length)
     {
         char input = string[index];
         switch (state)
@@ -129,8 +131,7 @@ int main()
             if (input == 'm')
             {
                 state = 9;
-                printf("correct");
-                return 0;
+                index++;
                 break;
             }
             else
@@ -145,6 +146,6 @@ int main()
             return 0;
         }
         }
-    
     }
+    printf("Correct");
 }
