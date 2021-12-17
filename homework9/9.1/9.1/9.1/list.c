@@ -75,20 +75,6 @@ bool addInList(List* list, const char* word, int count)
     return false;
 }
 
-bool isInList(List* list, char const* word)
-{
-    ListElement* currentElement = list->head;
-    while (currentElement != NULL)
-    {   
-        if (strcmp(currentElement->word, word) == 0)
-        {
-            return true;
-        }
-        currentElement = currentElement->next;
-    }
-    return false;
-}
-
 char const* getWordHead(List* list)
 {   
     if (isEmpty(list))

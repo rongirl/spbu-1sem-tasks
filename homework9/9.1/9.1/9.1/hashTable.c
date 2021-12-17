@@ -75,9 +75,12 @@ double getMiddleLength(HashTable* hashTable)
     int sumOfLengths = 0;
     int countOfLists = 0;
     for (int i = 0; i < hashTable->size; i++)
-    {
-        sumOfLengths += getLengthOfList(hashTable->lists[i]);
-        ++countOfLists;
+    {   
+        if (!isEmpty(hashTable->lists[i]))
+        {
+            sumOfLengths += getLengthOfList(hashTable->lists[i]);
+            ++countOfLists;
+        }
     }
     if (sumOfLengths != 0)
     {
@@ -93,7 +96,9 @@ bool addInHashTable(HashTable* hashTable, const char* word, int count)
     {
         ++hashTable->count;
         hashTable->fillFactor = 1.0 * hashTable->count / hashTable->size;
+        return true;
     }
+    return false;
 }
 
 void deleteHashTable(HashTable* hashTable)
@@ -119,7 +124,7 @@ void resize(HashTable* hashTable)
         }
         deleteList(hashTable->lists[i]);
     }
-    deleteList(hashTable->lists);
+    free(hashTable->lists);
     hashTable->size *= 2;
     hashTable->count = 0;
     hashTable->lists = calloc(hashTable->size, sizeof(List*));
@@ -146,4 +151,10 @@ void addWordInHashTable(HashTable* hashTable, const char* word)
     {
         resize(hashTable);
     }
+}
+
+
+bool testHashFunction()
+{
+    return hashFunction("abcdefgsdasd", 41) != hashFunction("abbcdefgsdasd", 41);
 }

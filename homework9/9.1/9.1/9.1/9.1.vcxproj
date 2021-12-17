@@ -22,12 +22,15 @@
     <ClCompile Include="9.1.c" />
     <ClCompile Include="hashTable.c" />
     <ClCompile Include="list.c" />
+    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hashTable.h" />
     <ClInclude Include="list.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="test.txt" />
     <Text Include="text.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
