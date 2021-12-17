@@ -1,5 +1,5 @@
 #include "hashTable.h"
-#include <stdlib.h>
+#include "test.h"
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
@@ -7,6 +7,11 @@
 int main()
 {   
 	setlocale(LC_ALL, "rus");
+	if (!isPassed())
+	{
+		printf(":(");
+		return -1;
+	}
     HashTable* hashTable = createHashTable();
 	FILE* file = fopen("test.txt", "r");
 	if (!file)

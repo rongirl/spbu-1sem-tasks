@@ -153,7 +153,6 @@ void addWordInHashTable(HashTable* hashTable, const char* word)
     }
 }
 
-
 bool testHashFunction()
 {
     return hashFunction("abcdefgsdasd", 41) != hashFunction("abbcdefgsdasd", 41);

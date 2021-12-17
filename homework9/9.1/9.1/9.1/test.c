@@ -1,6 +1,7 @@
 #include "hashTable.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include "test.h"
 
 bool isPassed()
 {
@@ -21,5 +22,13 @@ bool isPassed()
 		}
 	}
 	fclose(file);
-	return true;
+	double fillFactorTest = getFillFactor(tableTest);
+	double middleLengthTest = getMiddleLength(tableTest);
+	int maximumLengthTest = getMaximumLength(tableTest);
+	deleteHashTable(tableTest);
+	return
+		maximumLengthTest == 28 &&
+		0.646341 - fillFactorTest < 0.00001 &&
+		9.636364 - middleLengthTest < 0.00001 &&
+		testHashFunction();;
 }
