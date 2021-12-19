@@ -1,6 +1,7 @@
 #include "testList.h"
+#include <string.h>
 
-bool areTestsPassed()
+bool areTestsOfListPassed()
 {
     List* list = createList();
     if (!isEmpty(list))
@@ -9,12 +10,12 @@ bool areTestsPassed()
     }
     add(list, "ar", "89");
     add(list, "yar", "79");
-    if (getHeadName(list) != "ar" || getHeadPhone(list) != "89" || getLength(list) != 2)
+    if (strcmp(getHeadName(list), "ar") != 0 || strcmp(getHeadPhone(list), "89") != 0 || getLength(list) != 2)
     {
         return false;
     }
     deleteHead(list);
-    if (getHeadName(list) != "yar" || getHeadPhone(list) != "79")
+    if (strcmp(getHeadName(list), "yar") != 0 || strcmp(getHeadPhone(list), "79") != 0)
     {
         return false;
     }

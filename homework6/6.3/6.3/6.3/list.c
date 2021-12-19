@@ -13,6 +13,7 @@ typedef struct ListElement
 typedef struct List
 {
     ListElement* head;
+    ListElement* tail;
     int length;
 } List;
 
@@ -23,9 +24,7 @@ typedef struct Position
 
 List* createList()
 {
-    List* list = calloc(1, sizeof(List));
-    list->length = 0;
-    return list;
+    return calloc(1, sizeof(List));
 }
 
 bool isEmpty(List* list)
@@ -38,8 +37,8 @@ void add(List* list, char* name, char* phone)
     list->length++;
     ListElement* newElement = calloc(1, sizeof(ListElement));
     char* newName = calloc(1, sizeof(char));
-    char* newPhone = calloc(1, sizeof(char));
     strcpy(newName, name);
+    char* newPhone = calloc(1, sizeof(char));
     strcpy(newPhone, phone);
     newElement->name = newName;
     newElement->phone = newPhone;
@@ -47,14 +46,11 @@ void add(List* list, char* name, char* phone)
     if (isEmpty(list))
     {
         list->head = newElement;
+        list->tail = list->head;
         return;
     }
-    ListElement* currentElement = list->head;
-    while (currentElement->next != NULL)
-    {
-        currentElement = currentElement->next;
-    }
-    currentElement->next = newElement;
+    list->tail->next = newElement;
+    list->tail = list->tail->next;
 }
 
 void printList(List* list)
@@ -97,20 +93,39 @@ void deleteHead(List* list)
 
 void deleteList(List* list)
 {
-    ListElement* position = list->head;
-    while (position != NULL)
-    {   
-        list->length--;
-        list->head = list->head->next;
-        free(position);
-        position = list->head;
+    if (!isEmpty(list))
+    {
+        deleteHead(list);
     }
     free(list);
 }
 
 bool checkSort(List* list, int command)
 {
-    ListElement* currentElement = list->head;
-    int length = getLength(list);
-    if (command)
+    if (isEmpty(list))
+    {
+        return true;
+    }
+    ListElement* previousElement = list->head;
+    ListElement* currentElement = list->head->next;
+    while (currentElement != NULL)
+    {
+        int comparison = 0;
+        if (command == 0)
+        {
+            comparison = strcmp(currentElement->name, previousElement->name);
+        }
+        else
+        {
+            comparison = strcmp(currentElement->phone, previousElement->phone);
+        }
+
+        if (comparison < 0)
+        {
+            return false;
+        }
+        previousElement = currentElement;
+        currentElement = currentElement->next;
+    }
+    return true;
 }

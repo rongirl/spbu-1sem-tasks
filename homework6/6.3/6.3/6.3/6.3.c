@@ -2,10 +2,47 @@
 #include <locale.h>
 #include "list.h"
 #include "mergeSort.h"
+#include "testList.h"
+
+bool testMergeSort()
+{
+    List* listTestOne = createList();
+    add(listTestOne, "abc", "1234");
+    add(listTestOne, "bac", "12345");
+    add(listTestOne, "cba", "1233");
+    add(listTestOne, "acb", "2345");
+    add(listTestOne, "bcc", "4123");
+    add(listTestOne, "ccb", "12346");
+    List* newListTestOne = createList();
+    newListTestOne = mergeSort(newListTestOne, 0);
+    bool checkSortOne = checkSort(newListTestOne);
+    List* listTestTwo = createList();
+    add(listTestTwo, "abc", "1234");
+    add(listTestTwo, "bac", "12345");
+    add(listTestTwo, "cba", "1233");
+    add(listTestTwo, "acb", "2345");
+    add(listTestTwo, "bcc", "4123");
+    add(listTestTwo, "ccb", "12346");
+    List* newListTestTwo = createList();
+    newListTestTwo = mergeSort(newListTestTwo, 1);
+    bool checkSortTwo = checkSort(newListTestTwo);
+    return
+        checkSortOne && 
+        checkSortTwo;
+}
+
+bool areTestsPassed()
+{
+    return  areTestsOfListPassed() && testMergeSort();
+}
 
 int main()
 {   
     setlocale(LC_ALL, "rus");
+    if (!areTestsPassed())
+    {
+        return -1;
+    }
     FILE* file = fopen("input.txt", "r");
     if (file == NULL)
     {

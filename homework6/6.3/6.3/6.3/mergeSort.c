@@ -1,7 +1,7 @@
 #include "mergeSort.h"
 #include "list.h"
 
-void movingElements(List* listOne, List* listTwo, int count)
+void moveElements(List* listOne, List* listTwo, int count)
 {
     for (int i = 0; i < count; i++)
     {
@@ -26,20 +26,20 @@ List* merge(List* leftList, List* rightList, int command)
         }
         if (comparison < 0)
         {
-            movingElements(leftList, newList, 1);
+            moveElements(leftList, newList, 1);
         }
         else
         {
-            movingElements(rightList, newList, 1);
+            moveElements(rightList, newList, 1);
         }
     }
     if (getLength(rightList) == 0)
     {
-        movingElements(leftList, newList, getLength(leftList));
+        moveElements(leftList, newList, getLength(leftList));
     }
     else
     {
-        movingElements(rightList, newList, getLength(rightList));
+        moveElements(rightList, newList, getLength(rightList));
     }
     deleteList(leftList);
     deleteList(rightList);
@@ -54,9 +54,9 @@ List* mergeSort(List* list, int command)
         return list;
     }
     List* leftList = createList();
-    movingElements(list, leftList, length / 2);
+    moveElements(list, leftList, length / 2);
     List* rightList = createList();
-    movingElements(list, rightList, length - length / 2);
+    moveElements(list, rightList, length - length / 2);
     deleteList(list);
     leftList = mergeSort(leftList, command);
     rightList = mergeSort(rightList, command);

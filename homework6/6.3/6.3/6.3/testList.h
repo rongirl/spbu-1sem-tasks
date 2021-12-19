@@ -4,5 +4,5 @@
 #include "mergeSort.h"
 #include <stdbool.h>
 
-bool areTestsPassed();
-
+// тесты для списка
+bool areTestsOfListPassed();
