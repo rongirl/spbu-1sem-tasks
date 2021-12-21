@@ -58,4 +58,5 @@ int main()
         printf("Tests are failed :(");
         return -1;
     }
+    printf("Tests are passed :)");
 }
