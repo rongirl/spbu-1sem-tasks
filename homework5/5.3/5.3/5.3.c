@@ -25,7 +25,7 @@ int priority(const char operator)
     return 100;
 }
 
-void assign(char postfix[], char symbol, int* index)
+void assign(char postfix[], const char symbol, int* index)
 {
     postfix[*index] = symbol;
     ++(*index);
