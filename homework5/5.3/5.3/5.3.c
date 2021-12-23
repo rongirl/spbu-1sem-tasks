@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <locale.h>
 
-int priority(char operator)
+int priority(const char operator)
 {   
     switch (operator)
     {
@@ -25,21 +25,26 @@ int priority(char operator)
     return 100;
 }
 
+void assign(char postfix[], char symbol, int* index)
+{
+    postfix[*index] = symbol;
+    ++(*index);
+    postfix[*index] = ' ';
+    ++(*index);
+}
+
 void convertToPostfix(char postfix[], const char infix[])
 {
     StackElement* head = NULL;
     int indexOfPostfix = 0;
-    int length = strlen(infix);
+    const int length = strlen(infix);
     for (int i = 0; i < length; i++)
     {
         if (infix[i] != '\0' && infix[i] != ' ' && infix[i] != '\n')
         {
             if (infix[i] >= '0' && infix[i] <= '9')
-            {
-                postfix[indexOfPostfix] = infix[i];
-                ++indexOfPostfix;
-                postfix[indexOfPostfix] = ' ';
-                ++indexOfPostfix;
+            {   
+                assign(postfix, infix[i], &indexOfPostfix);
             }
             else switch (infix[i])
             {
@@ -50,13 +55,10 @@ void convertToPostfix(char postfix[], const char infix[])
             {
                 while (!isEmpty(head))
                 {
-                    char operatorInStack = pop(&head);
+                    const char operatorInStack = pop(&head);
                     if (priority(infix[i]) >= priority(operatorInStack))
                     {
-                        postfix[indexOfPostfix] = operatorInStack;
-                        ++indexOfPostfix;
-                        postfix[indexOfPostfix] = ' ';
-                        ++indexOfPostfix;
+                        assign(postfix, operatorInStack, &indexOfPostfix);
                     }
                     else
                     {
@@ -77,10 +79,7 @@ void convertToPostfix(char postfix[], const char infix[])
                 char operatorInStack = pop(&head);
                 while (operatorInStack != '(')
                 {
-                    postfix[indexOfPostfix] = operatorInStack;
-                    ++indexOfPostfix;
-                    postfix[indexOfPostfix] = ' ';
-                    ++indexOfPostfix;
+                    assign(postfix, operatorInStack, &indexOfPostfix);
                     operatorInStack = pop(&head);
                 }
                 break;
@@ -90,14 +89,10 @@ void convertToPostfix(char postfix[], const char infix[])
     }
     while (!isEmpty(head))
     {
-        postfix[indexOfPostfix] = pop(&head);
-        ++indexOfPostfix;
-        postfix[indexOfPostfix] = ' ';
-        ++indexOfPostfix;
+        assign(postfix, pop(&head), &indexOfPostfix);
     }
     deleteStack(&head);
 }
-
 
 bool isPassed()
 {
