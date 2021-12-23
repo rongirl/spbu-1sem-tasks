@@ -2,14 +2,23 @@
 #include "list.h"
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 typedef struct HashTable
 {   
     List** lists;
     int size;
     int count;
-    double fillFactor;
 } HashTable;
+
+void deleteHashTable(HashTable* hashTable)
+{
+    for (int i = 0; i < hashTable->size; i++)
+    {
+        deleteList(hashTable->lists[i]);
+    }
+    free(hashTable);
+}
 
 HashTable* createHashTable()
 {
@@ -20,10 +29,10 @@ HashTable* createHashTable()
     }
     hashTable->size = 41;
     hashTable->count = 0;
-    hashTable->fillFactor = 0.0;
     hashTable->lists = calloc(hashTable->size, sizeof(List*));
     if (hashTable->lists == NULL)
-    {
+    {   
+        deleteHashTable(hashTable);
         return NULL;
     }
     for (int i = 0; i < hashTable->size; i++)
@@ -36,10 +45,10 @@ HashTable* createHashTable()
 int hashFunction(const char* word, int size)
 {
     int hash = 0;
-    int length = strlen(word);
+    const int length = strlen(word);
     for (int i = 0; i < length; i++)
     {
-        hash = (hash + word[i]) % size;
+        hash = (hash + abs(word[i])) % size;
     }
 }
 
@@ -53,7 +62,7 @@ void printHashTable(HashTable* hashTable)
 
 double getFillFactor(HashTable* hashTable)
 {
-    return hashTable->fillFactor;
+    return 1.0 * hashTable->count / hashTable->size;
 }
 
 int getMaximumLength(HashTable* hashTable)
@@ -70,7 +79,7 @@ int getMaximumLength(HashTable* hashTable)
     return maximumLength;
 }
 
-double getMiddleLength(HashTable* hashTable)
+double getAverageLength(HashTable* hashTable)
 {
     int sumOfLengths = 0;
     int countOfLists = 0;
@@ -95,22 +104,12 @@ bool addInHashTable(HashTable* hashTable, const char* word, int count)
     if (addInTable)
     {
         ++hashTable->count;
-        hashTable->fillFactor = 1.0 * hashTable->count / hashTable->size;
         return true;
     }
     return false;
 }
 
-void deleteHashTable(HashTable* hashTable)
-{
-    for (int i = 0; i < hashTable->size; i++)
-    {
-        deleteList(hashTable->lists[i]);
-    }
-    free(hashTable);
-}
-
-void resize(HashTable* hashTable)
+bool resize(HashTable* hashTable)
 {
     List* currentList = createList();
     for (int i = 0; i < hashTable->size; i++)
@@ -130,7 +129,7 @@ void resize(HashTable* hashTable)
     hashTable->lists = calloc(hashTable->size, sizeof(List*));
     if (hashTable->lists == NULL)
     {
-        return NULL;
+        return false;
     }
     for (int i = 0; i < hashTable->size; i++)
     {
@@ -142,18 +141,18 @@ void resize(HashTable* hashTable)
         deleteHead(currentList);
     }
     deleteList(currentList);
+    return true;
 }   
 
-void addWordInHashTable(HashTable* hashTable, const char* word)
+bool addWordInHashTable(HashTable* hashTable, const char* word)
 {
     addInHashTable(hashTable, word, 1);
-    if (hashTable->fillFactor > 1)
+    if (getFillFactor(hashTable) > 1)
     {
-        resize(hashTable);
+        if (!resize(hashTable))
+        {
+            return false;
+        }
     }
-}
-
-bool testHashFunction()
-{
-    return hashFunction("abcdefgsdasd", 41) != hashFunction("abbcdefgsdasd", 41);
+    return true;
 }

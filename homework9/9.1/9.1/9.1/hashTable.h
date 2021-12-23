@@ -6,7 +6,7 @@
 typedef struct HashTable HashTable;
 
 // добавление элемента в хеш таблицу 
-void addWordInHashTable(HashTable* hashTable, const char* word);
+bool addWordInHashTable(HashTable* hashTable, const char* word);
 
 // создание хеш таблицы
 HashTable* createHashTable();
@@ -21,10 +21,7 @@ int getMaximumLength(HashTable* hashTable);
 double getFillFactor(HashTable* hashTable);
  
 // взятие средней длины списков хеш таблицы
-double getMiddleLength(HashTable* hashTable);
+double getAverageLength(HashTable* hashTable);
 
 // удаление хеш таблицы
 void deleteHashTable(HashTable* hashTable);
-
-// проверка хеш функции
-bool testHashFunction();
