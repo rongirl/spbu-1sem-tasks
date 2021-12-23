@@ -3,54 +3,86 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <locale.h>
+#include <math.h>
 
-int hashFunction(const char* string)
+int hashFunction(const char* string, const int startIndex, const int endIndex)
 {
-    const int b = 10000;
+    const int base = 3;
     const int size = strlen(string);
-    const int module = 1009;
+    const int module = 10009;
     int hash = 0;
-    for (int i = 0; i < size; i++)
+    for (int i = startIndex; i < endIndex; i++)
     {
-        hash = (hash * b + string[i]) % module;
+        hash = (hash * base + string[i]) % module;
+    }
+    if (hash < 0)
+    {
+        hash += module;
     }
     return hash;
 }
 
+bool isEqual(const char* string, const char* substring, const int startIndex, const int endIndex)
+{
+    for (int i = startIndex; i < endIndex; i++)
+    {
+        if (string[i] != substring[i - startIndex])
+        {
+            return false;
+        }
+    }
+    return true;
+} 
+
+int exponentiation(int number, int power, int moduleNumber)
+{
+    int result = 1;
+    while (power)
+    {
+        if (power & 1)
+        {
+            result *= number % moduleNumber;
+            --power;
+        }
+        else
+        {
+            number *= number % moduleNumber;
+            power >>= 1;
+        }
+    }
+    return result;
+}
+
+int rollingHash(const char* string, const int base, const int baseInPower, const int moduleNumber, 
+    const int indexOfPreviousSymbol, const int previousHash, const int lengthOfSubstring)
+{
+    return 
+        ((previousHash - (string[indexOfPreviousSymbol - 1]) * baseInPower) * base + string[indexOfPreviousSymbol - 1 + lengthOfSubstring]) % moduleNumber;
+}
+
 int rabinKarp(const char* string, const char* substring)
 {   
-    int lengthOfSubstring = strlen(substring);
-    int lengthOfString = strlen(string);
-    char currentString[100] = { '\0' };
-    for (int i = 0; i < lengthOfSubstring; i++)
-    {
-        currentString[i] = string[i];
-    }
-    int hashSubstring = hashFunction(substring);
-    int hashCurrentString = hashFunction(currentString);
-    for (int i = 0; i < lengthOfString - lengthOfSubstring + 1; i++)
+    const int lengthOfSubstring = strlen(substring);
+    const int lengthOfString = strlen(string);
+    const int hashSubstring = hashFunction(substring, 0, lengthOfSubstring);
+    int hashCurrentString = hashFunction(string, 0, lengthOfSubstring);
+    const int base = 3;
+    const int module = 10009;
+    const int baseInPower = exponentiation(base, lengthOfSubstring - 1, module);
+    for (int i = 1; i < lengthOfString - lengthOfSubstring + 2; i++)
     {
         if (hashSubstring == hashCurrentString)
         {
-            int index = 0; 
-            while (index < lengthOfSubstring && substring[index] == currentString[index])
+            if (isEqual(string, substring, i - 1, i + lengthOfSubstring - 1))
             {
-                index++;
-            }
-            if (index == lengthOfSubstring)
-            {
-                return i;
+                return i - 1;
             }
         }
-        for (int i = 0; i < lengthOfSubstring; i++)
+        hashCurrentString = rollingHash(string, base, baseInPower, module, i, hashCurrentString, lengthOfSubstring);
+        if (hashCurrentString < 0)
         {
-            currentString[i] = '\0';
+            hashCurrentString += module;
         }
-        for (int j = i + 1; j < lengthOfSubstring + i + 1; j++)
-        {
-            currentString[j - i - 1] = string[j];
-        }
-        hashCurrentString = hashFunction(currentString);
     }
     return -1;
 }
@@ -63,8 +95,8 @@ bool isTestTrue(char const* string, char const* substring, int answer)
 bool areTestsPassed()
 {
     return
+        isTestTrue("ai dsid", "sid", 4) &&
         isTestTrue("A middle of adventure,", " of ", 8) &&
-        isTestTrue("aiaiaia dsid", "sid", 9) &&
         isTestTrue("ououoouoiii", "uou", 1) &&
         isTestTrue("ahahahah", "ahahahahahah", -1) &&
         isTestTrue("ararararas", "bb", -1);
