@@ -1,0 +1,13 @@
+name: Build
+
+on: push
+
+jobs:
+    build:
+        name: Build for Windows
+        runs-on: windows-2022
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Build for Windows
+              run: gcc -fPIC -lm -shared src/stats.c -o dist/sqlite3-stats.dll
