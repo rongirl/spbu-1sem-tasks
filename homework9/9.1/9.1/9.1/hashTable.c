@@ -50,6 +50,7 @@ int hashFunction(const char* word, int size)
     {
         hash = (hash + abs(word[i])) % size;
     }
+    return hash;
 }
 
 void printHashTable(HashTable* hashTable)
