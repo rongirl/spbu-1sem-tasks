@@ -12,6 +12,20 @@ void begin()
     printf("3 - проверить наличие заданного ключа в словаре.\n");
     printf("4 - удалить заданный ключ и связанное с ним значение из словаря.\n");
 }
+ 
+bool isTrue()
+{
+    Node* tree = createTree();
+    tree = addValue(tree, 4, "4");
+    tree = addValue(tree, 5, "5");
+    tree = addValue(tree, 2, "2");
+    tree = addValue(tree, 8, "8");
+    deleteValue(&tree, 5);
+    deleteValue(&tree, 8);
+    deleteValue(&tree, 4);
+    deleteTree(&tree);
+    return true;
+}
 
 bool areTestsPassed()
 {
@@ -40,7 +54,7 @@ bool areTestsPassed()
 int main()
 {   
     setlocale(LC_ALL, "rus");
-    if (!areTestsPassed())
+    if (!areTestsPassed() || !isTrue())
     {
         printf(":(");
         return -1;

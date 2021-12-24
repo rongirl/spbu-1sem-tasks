@@ -15,7 +15,7 @@ bool isEmpty(Node* root);
 Node* addValue(Node* root, int key, char* value);
 
 // возвращение значения вершины по ключу
-char* getValue(Node* root, int key);
+const char* getValue(Node* root, int key);
 
 // проверка на присутствие ключа в дереве
 bool inTree(Node** root, int key);

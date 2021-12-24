@@ -105,7 +105,7 @@ bool inTree(Node** root, int key)
     return search(*root, key) != NULL;
 }
 
-char* getValue(Node* root, int key)
+const char* getValue(Node* root, int key)
 {   
     Node* searchNode = search(root, key);
     if (searchNode == NULL)
@@ -136,27 +136,33 @@ void deleteNode(Node* node)
         free(node->value);
         node->value = newValue;
         deleteNode(maximum);
+        free(node->value);
+        free(node);
         return;
     }
     else if (node->leftSon != NULL)
     {   
         if (node == node->parent->leftSon) 
-        {
+        {   
+            node->leftSon->parent = node->parent;
             node->parent->leftSon = node->leftSon;
         }
         else 
-        {
+        {   
+            node->leftSon->parent = node->parent;
             node->parent->rightSon = node->leftSon;
         }
     }
     else if (node->rightSon != NULL)
     {   
         if (node == node->parent->rightSon) 
-        {
-            node->parent->rightSon = node->rightSon;
+        {   
+            node->rightSon->parent = node->parent;
+            node->parent->rightSon = node->rightSon; 
         }
         else 
-        {
+        {   
+            node->rightSon->parent = node->parent;
             node->parent->leftSon = node->rightSon;
         }
     }
@@ -179,15 +185,17 @@ Node* deleteRoot(Node* root)
 {   
     Node* newRoot = calloc(1, sizeof(Node));
     if (root->leftSon != NULL && root->rightSon != NULL)
-    {
+    {   
         Node* maximum = findMaximum(root);
-        newRoot->key = maximum->key;
+        root->key = maximum->key;
         char* newValue = calloc(strlen(maximum->value) + 1, sizeof(char));
         strcpy(newValue, maximum->value);
-        newRoot->value = newValue;
+        free(root->value);
+        root->value = newValue;
         deleteNode(maximum);
-        newRoot->leftSon = root->leftSon;
+        root->leftSon = root->leftSon;
         newRoot->rightSon = root->rightSon;
+        newRoot->parent = NULL;
         if (root->leftSon != NULL)
         {
             root->leftSon->parent = newRoot;
@@ -198,13 +206,16 @@ Node* deleteRoot(Node* root)
         }
     }
     else if (root->rightSon == NULL)
-    {
+    {   
+        free(newRoot);
         newRoot = root->leftSon;
     }
     else
-    {
+    {   
+        free(newRoot);
         newRoot = root->rightSon;
     }
+    newRoot->parent = NULL;
     free(root->value);
     free(root);
     return newRoot;
@@ -237,11 +248,12 @@ void deleteTreeRecursive(Node* root)
     }
     deleteTreeRecursive(root->leftSon);
     deleteTreeRecursive(root->rightSon);
+    free(root->value);
     free(root);
 }
 
 void deleteTree(Node** root)
-{
+{   
     deleteTreeRecursive(*root);
     *root = NULL;
 }
