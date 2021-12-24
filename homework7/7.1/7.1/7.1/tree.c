@@ -24,6 +24,10 @@ bool isEmpty(Node* root)
 Node* createNode(int key, char* value)
 {
     Node* newNode = calloc(1, sizeof(Node));
+    if (newNode == NULL)
+    {
+        return NULL;
+    }
     newNode->key = key;
     char* newValue = calloc(strlen(value) + 1, sizeof(char));
     strcpy(newValue, value);
@@ -72,6 +76,7 @@ Node* addValue(Node* root, int key, char* value)
             i = i->leftSon;
         }
     }
+    return NULL;
 }
 
 Node* search(Node* root, int key)
@@ -100,9 +105,9 @@ bool inTree(Node** root, int key)
     return search(*root, key) != NULL;
 }
 
-char* getValue(Node** root, int key)
+char* getValue(Node* root, int key)
 {   
-    Node* searchNode = search(*root, key);
+    Node* searchNode = search(root, key);
     if (searchNode == NULL)
     {
         return NULL;
@@ -128,6 +133,7 @@ void deleteNode(Node* node)
         node->key = maximum->key;
         char* newValue = calloc(strlen(maximum->value) + 1, sizeof(char));
         strcpy(newValue, maximum->value);
+        free(node->value);
         node->value = newValue;
         deleteNode(maximum);
         return;

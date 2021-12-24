@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 
+// структура вершины
 typedef struct Node Node;
 
 // создание дерева
@@ -14,7 +15,7 @@ bool isEmpty(Node* root);
 Node* addValue(Node* root, int key, char* value);
 
 // возвращение значения вершины по ключу
-char* getValue(Node** root, int key);
+char* getValue(Node* root, int key);
 
 // проверка на присутствие ключа в дереве
 bool inTree(Node** root, int key);
@@ -23,4 +24,4 @@ bool inTree(Node** root, int key);
 void deleteValue(Node** root, int key);
 
 // удаление дерева
-void deleteTree(Node* root);
+void deleteTree(Node** root);

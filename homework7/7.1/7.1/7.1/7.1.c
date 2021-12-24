@@ -1,6 +1,7 @@
 #include "tree.h"
 #include <stdio.h>
 #include <locale.h>
+#include <string.h>
 
 void begin()
 {   
@@ -27,12 +28,11 @@ bool areTestsPassed()
     deleteValue(&tree, 10);
     bool tenInTree = inTree(&tree, 10);
     bool eightInTree = inTree(&tree, 8);
-    if (strcmp(getValue(&tree, 9), "arara") != 0 || strcmp(getValue(&tree, 7), "iii") != 0)
+    if (strcmp(getValue(tree, 9), "arara") != 0 || strcmp(getValue(tree, 7), "iii") != 0)
     {
         deleteTree(&tree);
         return false;
     }
- 
     deleteTree(&tree);
     return sevenInTree && !fiveInTree && !eightInTree && !tenInTree;
 }
@@ -83,7 +83,7 @@ int main()
                 break;
             }
             printf("Значение по ключу найдено:");
-            printf("%s\n", getValue(&tree, key));
+            printf("%s\n", getValue(tree, key));
             break;
         }
         case '3':
