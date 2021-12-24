@@ -28,3 +28,6 @@ void deleteHead(List* list);
 
 // взятие количества элементов в вершине списка
 int getCountHead(List* list);
+
+// взятие длины
+int getLengthOfList(List* list);

@@ -29,7 +29,7 @@ bool isPassed()
     int maximumLengthTest = getMaximumLength(tableTest);
     deleteHashTable(tableTest);
     return
-        maximumLengthTest == 28 &&
+        maximumLengthTest == 4 &&
         0.646341 - fillFactorTest < 0.00001 &&
-        9.636364 - averageLengthTest < 0.00001;
+        1.472222 - averageLengthTest < 0.00001;
 }

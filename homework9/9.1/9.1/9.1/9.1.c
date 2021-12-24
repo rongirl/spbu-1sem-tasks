@@ -13,7 +13,7 @@ int main()
         return -1;
     }
     HashTable* hashTable = createHashTable();
-    FILE* file = fopen("text.txt", "r");
+    FILE* file = fopen("test.txt", "r");
     if (!file)
     {
         printf("File not found");

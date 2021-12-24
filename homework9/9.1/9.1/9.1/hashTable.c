@@ -17,6 +17,7 @@ void deleteHashTable(HashTable* hashTable)
     {
         deleteList(hashTable->lists[i]);
     }
+    free(hashTable->lists);
     free(hashTable);
 }
 
