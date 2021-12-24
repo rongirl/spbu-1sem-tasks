@@ -54,7 +54,7 @@ bool addInList(List* list, const char* word, int count)
     {   
         ListElement* newElement = calloc(1, sizeof(ListElement));
         newElement->counter = count;
-        char const* newWord = calloc(strlen(word) + 1, sizeof(char));
+        char* newWord = calloc(strlen(word) + 1, sizeof(char));
         strcpy(newWord, word);
         newElement->word = newWord;
         newElement->next = NULL;
@@ -74,8 +74,7 @@ bool addInList(List* list, const char* word, int count)
     currentElement->counter += count;
     return false;
 }
-
-char const* getWordHead(List* list)
+const char* getWordHead(List* list)
 {   
     if (isEmpty(list))
     {
@@ -88,7 +87,7 @@ int getCountHead(List* list)
 {
     if (isEmpty(list))
     {
-        return NULL;
+        return 0;
     }
     return list->head->counter;
 }
@@ -101,8 +100,8 @@ void deleteHead(List* list)
     }
     ListElement* currentElement = list->head;
     list->head = list->head->next;
-    free(currentElement->word);
-    free(currentElement);
+    free((void*)currentElement->word);
+    free((void*)currentElement);
     --list->length;
 }
 

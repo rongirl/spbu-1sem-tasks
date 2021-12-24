@@ -21,7 +21,7 @@ void deleteList(List* list);
 bool isEmpty(List* list);
 
 // взятие значения элемента списка
-char const* getWordHead(List* list);
+const char* getWordHead(List* list);
 
 // удаление вершины списка
 void deleteHead(List* list);
@@ -31,3 +31,6 @@ int getCountHead(List* list);
 
 // взятие длины
 int getLengthOfList(List* list);
+
+// распечатывание списка
+void printList(List* list);

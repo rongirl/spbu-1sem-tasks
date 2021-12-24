@@ -118,7 +118,7 @@ bool resize(HashTable* hashTable)
     {
         while (!isEmpty(hashTable->lists[i]))
         {
-            char* word = getWordHead(hashTable->lists[i]);
+            const char* word = getWordHead(hashTable->lists[i]);
             int count = getCountHead(hashTable->lists[i]);
             addInList(currentList, word, count);
             deleteHead(hashTable->lists[i]);
